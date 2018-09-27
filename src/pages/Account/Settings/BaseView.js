@@ -12,22 +12,22 @@ const { Option } = Select;
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }) => (
-  <Fragment>
-    <div className={styles.avatar_title}>Avatar</div>
-    <div className={styles.avatar}>
-      <img src={avatar} alt="avatar" />
-    </div>
-    <Upload fileList={[]}>
-      <div className={styles.button_view}>
-        <Button icon="upload">
-          <FormattedMessage
-            id="app.settings.basic.avatar"
-            defaultMessage="Change avatar"
-          />
-        </Button>
-      </div>
-    </Upload>
-  </Fragment>
+    <Fragment>
+        <div className={styles.avatar_title}>Avatar</div>
+        <div className={styles.avatar}>
+            <img src={avatar} alt="avatar" />
+        </div>
+        <Upload fileList={[]}>
+            <div className={styles.button_view}>
+                <Button icon="upload">
+                    <FormattedMessage
+                        id="app.settings.basic.avatar"
+                        defaultMessage="Change avatar"
+                    />
+                </Button>
+            </div>
+        </Upload>
+    </Fragment>
 );
 
 const validatorGeographic = (rule, value, callback) => {
@@ -88,11 +88,11 @@ class BaseView extends Component {
             form: { getFieldDecorator },
         } = this.props;
         return (
-          <div className={styles.baseView} ref={this.getViewDom}>
-            <div className={styles.left}>
-              <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
-                  {getFieldDecorator('email', {
+            <div className={styles.baseView} ref={this.getViewDom}>
+                <div className={styles.left}>
+                    <Form layout="vertical" onSubmit={this.handleSubmit} hideRequiredMark>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.email' })}>
+                            {getFieldDecorator('email', {
                                 rules: [
                                     {
                                         required: true,
@@ -103,9 +103,9 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(<Input />)}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
-                  {getFieldDecorator('name', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.nickname' })}>
+                            {getFieldDecorator('name', {
                                 rules: [
                                     {
                                         required: true,
@@ -116,9 +116,9 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(<Input />)}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
-                  {getFieldDecorator('profile', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.profile' })}>
+                            {getFieldDecorator('profile', {
                                 rules: [
                                     {
                                         required: true,
@@ -129,16 +129,16 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(
-                              <Input.TextArea
-                                placeholder={formatMessage({
+                                <Input.TextArea
+                                    placeholder={formatMessage({
                                         id: 'app.settings.basic.profile-placeholder',
                                     })}
-                                rows={4}
-                              />
+                                    rows={4}
+                                />
                             )}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.country' })}>
-                  {getFieldDecorator('country', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.country' })}>
+                            {getFieldDecorator('country', {
                                 rules: [
                                     {
                                         required: true,
@@ -149,13 +149,13 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(
-                              <Select style={{ maxWidth: 220 }}>
-                                <Option value="China">中国</Option>
-                              </Select>
+                                <Select style={{ maxWidth: 220 }}>
+                                    <Option value="China">中国</Option>
+                                </Select>
                             )}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.geographic' })}>
-                  {getFieldDecorator('geographic', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.geographic' })}>
+                            {getFieldDecorator('geographic', {
                                 rules: [
                                     {
                                         required: true,
@@ -169,9 +169,9 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(<GeographicView />)}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.address' })}>
-                  {getFieldDecorator('address', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.address' })}>
+                            {getFieldDecorator('address', {
                                 rules: [
                                     {
                                         required: true,
@@ -182,9 +182,9 @@ class BaseView extends Component {
                                     },
                                 ],
                             })(<Input />)}
-                </FormItem>
-                <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
-                  {getFieldDecorator('phone', {
+                        </FormItem>
+                        <FormItem label={formatMessage({ id: 'app.settings.basic.phone' })}>
+                            {getFieldDecorator('phone', {
                                 rules: [
                                     {
                                         required: true,
@@ -196,19 +196,19 @@ class BaseView extends Component {
                                     { validator: validatorPhone },
                                 ],
                             })(<PhoneView />)}
-                </FormItem>
-                <Button type="primary">
-                  <FormattedMessage
-                    id="app.settings.basic.update"
-                    defaultMessage="Update Information"
-                  />
-                </Button>
-              </Form>
+                        </FormItem>
+                        <Button type="primary">
+                            <FormattedMessage
+                                id="app.settings.basic.update"
+                                defaultMessage="Update Information"
+                            />
+                        </Button>
+                    </Form>
+                </div>
+                <div className={styles.right}>
+                    <AvatarView avatar={this.getAvatarURL()} />
+                </div>
             </div>
-            <div className={styles.right}>
-              <AvatarView avatar={this.getAvatarURL()} />
-            </div>
-          </div>
         );
     }
 }

@@ -4,14 +4,14 @@ import { formatMessage } from 'umi/locale';
 import styles from './ThemeColor.less';
 
 const Tag = ({ color, check, ...rest }) => (
-  <div
-    {...rest}
-    style={{
+    <div
+        {...rest}
+        style={{
             backgroundColor: color,
         }}
-  >
-    {check ? <Icon type="check" /> : ''}
-  </div>
+    >
+        {check ? <Icon type="check" /> : ''}
+    </div>
 );
 
 const ThemeColor = ({ colors, title, value, onChange }) => {
@@ -53,24 +53,24 @@ const ThemeColor = ({ colors, title, value, onChange }) => {
         ];
     }
     return (
-      <div className={styles.themeColor}>
-        <h3 className={styles.title}>{title}</h3>
-        <div className={styles.content}>
-          {colorList.map(({ key, color }) => (
-            <Tooltip
-              key={color}
-              title={formatMessage({ id: `app.setting.themecolor.${key}` })}
-            >
-              <Tag
-                className={styles.colorBlock}
-                color={color}
-                check={value === color}
-                onClick={() => onChange && onChange(color)}
-              />
-            </Tooltip>
+        <div className={styles.themeColor}>
+            <h3 className={styles.title}>{title}</h3>
+            <div className={styles.content}>
+                {colorList.map(({ key, color }) => (
+                    <Tooltip
+                        key={color}
+                        title={formatMessage({ id: `app.setting.themecolor.${key}` })}
+                    >
+                        <Tag
+                            className={styles.colorBlock}
+                            color={color}
+                            check={value === color}
+                            onClick={() => onChange && onChange(color)}
+                        />
+                    </Tooltip>
                 ))}
+            </div>
         </div>
-      </div>
     );
 };
 

@@ -47,19 +47,19 @@ export default class PromiseRender extends React.PureComponent {
         const { component: Component } = this.state;
         const { ok, error, promise, ...rest } = this.props;
         return Component ? (
-          <Component {...rest} />
+            <Component {...rest} />
         ) : (
-          <div
-            style={{
+            <div
+                style={{
                     width: '100%',
                     height: '100%',
                     margin: 'auto',
                     paddingTop: 50,
                     textAlign: 'center',
                 }}
-          >
-            <Spin size="large" />
-          </div>
+            >
+                <Spin size="large" />
+            </div>
         );
     }
 }

@@ -74,28 +74,28 @@ class Gauge extends React.Component {
         };
         const data = [{ value: percent / 10 }];
         return (
-          <Chart
-            height={height}
-            data={data}
-            scale={cols}
-            padding={[-16, 0, 16, 0]}
-            forceFit={forceFit}
-          >
-            <Coord
-              type="polar"
-              startAngle={-1.25 * Math.PI}
-              endAngle={0.25 * Math.PI}
-              radius={0.8}
-            />
-            <Axis name="1" line={null} />
-            <Axis
-              line={null}
-              tickLine={null}
-              subTickLine={null}
-              name="value"
-              zIndex={2}
-              gird={null}
-              label={{
+            <Chart
+                height={height}
+                data={data}
+                scale={cols}
+                padding={[-16, 0, 16, 0]}
+                forceFit={forceFit}
+            >
+                <Coord
+                    type="polar"
+                    startAngle={-1.25 * Math.PI}
+                    endAngle={0.25 * Math.PI}
+                    radius={0.8}
+                />
+                <Axis name="1" line={null} />
+                <Axis
+                    line={null}
+                    tickLine={null}
+                    subTickLine={null}
+                    name="value"
+                    zIndex={2}
+                    gird={null}
+                    label={{
                         offset: -12,
                         formatter,
                         textStyle: {
@@ -104,73 +104,73 @@ class Gauge extends React.Component {
                             textAlign: 'center',
                         },
                     }}
-            />
-            <Guide>
-              <Line
-                start={[3, 0.905]}
-                end={[3, 0.85]}
-                lineStyle={{
+                />
+                <Guide>
+                    <Line
+                        start={[3, 0.905]}
+                        end={[3, 0.85]}
+                        lineStyle={{
                             stroke: color,
                             lineDash: null,
                             lineWidth: 2,
                         }}
-              />
-              <Line
-                start={[5, 0.905]}
-                end={[5, 0.85]}
-                lineStyle={{
+                    />
+                    <Line
+                        start={[5, 0.905]}
+                        end={[5, 0.85]}
+                        lineStyle={{
                             stroke: color,
                             lineDash: null,
                             lineWidth: 3,
                         }}
-              />
-              <Line
-                start={[7, 0.905]}
-                end={[7, 0.85]}
-                lineStyle={{
+                    />
+                    <Line
+                        start={[7, 0.905]}
+                        end={[7, 0.85]}
+                        lineStyle={{
                             stroke: color,
                             lineDash: null,
                             lineWidth: 3,
                         }}
-              />
-              <Arc
-                zIndex={0}
-                start={[0, 0.965]}
-                end={[10, 0.965]}
-                style={{
+                    />
+                    <Arc
+                        zIndex={0}
+                        start={[0, 0.965]}
+                        end={[10, 0.965]}
+                        style={{
                             stroke: bgColor,
                             lineWidth: 10,
                         }}
-              />
-              <Arc
-                zIndex={1}
-                start={[0, 0.965]}
-                end={[data[0].value, 0.965]}
-                style={{
+                    />
+                    <Arc
+                        zIndex={1}
+                        start={[0, 0.965]}
+                        end={[data[0].value, 0.965]}
+                        style={{
                             stroke: color,
                             lineWidth: 10,
                         }}
-              />
-              <Html
-                position={['50%', '95%']}
-                html={() => `
+                    />
+                    <Html
+                        position={['50%', '95%']}
+                        html={() => `
                 <div style="width: 300px;text-align: center;font-size: 12px!important;">
                   <p style="font-size: 14px; color: rgba(0,0,0,0.43);margin: 0;">${title}</p>
                   <p style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
                     ${data[0].value * 10}%
                   </p>
                 </div>`}
-              />
-            </Guide>
-            <Geom
-              line={false}
-              type="point"
-              position="value*1"
-              shape="pointer"
-              color={color}
-              active={false}
-            />
-          </Chart>
+                    />
+                </Guide>
+                <Geom
+                    line={false}
+                    type="point"
+                    position="value*1"
+                    shape="pointer"
+                    color={color}
+                    active={false}
+                />
+            </Chart>
         );
     }
 }

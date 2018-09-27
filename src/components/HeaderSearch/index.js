@@ -106,35 +106,35 @@ export default class HeaderSearch extends PureComponent {
             [styles.show]: searchMode,
         });
         return (
-          <span
-            className={classNames(className, styles.headerSearch)}
-            onClick={this.enterSearchMode}
-            onTransitionEnd={({ propertyName }) => {
+            <span
+                className={classNames(className, styles.headerSearch)}
+                onClick={this.enterSearchMode}
+                onTransitionEnd={({ propertyName }) => {
                     if (propertyName === 'width' && !searchMode) {
                         const { onVisibleChange } = this.props;
                         onVisibleChange(searchMode);
                     }
                 }}
-          >
-            <Icon type="search" key="Icon" />
-            <AutoComplete
-              key="AutoComplete"
-              {...restProps}
-              className={inputClass}
-              value={value}
-              onChange={this.onChange}
             >
-              <Input
-                ref={node => {
+                <Icon type="search" key="Icon" />
+                <AutoComplete
+                    key="AutoComplete"
+                    {...restProps}
+                    className={inputClass}
+                    value={value}
+                    onChange={this.onChange}
+                >
+                    <Input
+                        ref={node => {
                             this.input = node;
                         }}
-                aria-label={placeholder}
-                placeholder={placeholder}
-                onKeyDown={this.onKeyDown}
-                onBlur={this.leaveSearchMode}
-              />
-            </AutoComplete>
-          </span>
+                        aria-label={placeholder}
+                        placeholder={placeholder}
+                        onKeyDown={this.onKeyDown}
+                        onBlur={this.leaveSearchMode}
+                    />
+                </AutoComplete>
+            </span>
         );
     }
 }

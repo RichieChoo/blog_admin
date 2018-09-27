@@ -12,9 +12,9 @@ const AvatarList = ({ children, size, ...other }) => {
     );
 
     return (
-      <div {...other} className={styles.avatarList}>
-        <ul> {childrenWithProps} </ul>
-      </div>
+        <div {...other} className={styles.avatarList}>
+            <ul> {childrenWithProps} </ul>
+        </div>
     );
 };
 
@@ -26,15 +26,15 @@ const Item = ({ src, size, tips, onClick = () => {} }) => {
     });
 
     return (
-      <li className={cls} onClick={onClick}>
-        {tips ? (
-          <Tooltip title={tips}>
-            <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
-          </Tooltip>
+        <li className={cls} onClick={onClick}>
+            {tips ? (
+                <Tooltip title={tips}>
+                    <Avatar src={src} size={size} style={{ cursor: 'pointer' }} />
+                </Tooltip>
             ) : (
-              <Avatar src={src} size={size} />
+                <Avatar src={src} size={size} />
             )}
-      </li>
+        </li>
     );
 };
 

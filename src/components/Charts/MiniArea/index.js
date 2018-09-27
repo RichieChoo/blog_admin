@@ -45,62 +45,62 @@ class MiniArea extends React.PureComponent {
         const chartHeight = height + 54;
 
         return (
-          <div className={styles.miniChart} style={{ height }}>
-            <div className={styles.chartContent}>
-              {height > 0 && (
-                <Chart
-                  animate={animate}
-                  scale={scaleProps}
-                  height={chartHeight}
-                  forceFit={forceFit}
-                  data={data}
-                  padding={padding}
-                >
-                  <Axis
-                    key="axis-x"
-                    name="x"
-                    label={false}
-                    line={false}
-                    tickLine={false}
-                    grid={false}
-                    {...xAxis}
-                  />
-                  <Axis
-                    key="axis-y"
-                    name="y"
-                    label={false}
-                    line={false}
-                    tickLine={false}
-                    grid={false}
-                    {...yAxis}
-                  />
-                  <Tooltip showTitle={false} crosshairs={false} />
-                  <Geom
-                    type="area"
-                    position="x*y"
-                    color={color}
-                    tooltip={tooltip}
-                    shape="smooth"
-                    style={{
+            <div className={styles.miniChart} style={{ height }}>
+                <div className={styles.chartContent}>
+                    {height > 0 && (
+                        <Chart
+                            animate={animate}
+                            scale={scaleProps}
+                            height={chartHeight}
+                            forceFit={forceFit}
+                            data={data}
+                            padding={padding}
+                        >
+                            <Axis
+                                key="axis-x"
+                                name="x"
+                                label={false}
+                                line={false}
+                                tickLine={false}
+                                grid={false}
+                                {...xAxis}
+                            />
+                            <Axis
+                                key="axis-y"
+                                name="y"
+                                label={false}
+                                line={false}
+                                tickLine={false}
+                                grid={false}
+                                {...yAxis}
+                            />
+                            <Tooltip showTitle={false} crosshairs={false} />
+                            <Geom
+                                type="area"
+                                position="x*y"
+                                color={color}
+                                tooltip={tooltip}
+                                shape="smooth"
+                                style={{
                                     fillOpacity: 1,
                                 }}
-                  />
-                  {line ? (
-                    <Geom
-                      type="line"
-                      position="x*y"
-                      shape="smooth"
-                      color={borderColor}
-                      size={borderWidth}
-                      tooltip={false}
-                    />
+                            />
+                            {line ? (
+                                <Geom
+                                    type="line"
+                                    position="x*y"
+                                    shape="smooth"
+                                    color={borderColor}
+                                    size={borderWidth}
+                                    tooltip={false}
+                                />
                             ) : (
-                              <span style={{ display: 'none' }} />
+                                <span style={{ display: 'none' }} />
                             )}
-                </Chart>
+                        </Chart>
                     )}
+                </div>
             </div>
-          </div>
         );
     }
 }

@@ -142,27 +142,27 @@ class TagCloud extends Component {
         const { dv, w, h } = this.state;
 
         return (
-          <div
-            className={classNames(styles.tagCloud, className)}
-            style={{ width: '100%', height }}
-            ref={this.saveRootRef}
-          >
-            {dv && (
-            <Chart
-              width={w}
-              height={h}
-              data={dv}
-              padding={0}
-              scale={{
+            <div
+                className={classNames(styles.tagCloud, className)}
+                style={{ width: '100%', height }}
+                ref={this.saveRootRef}
+            >
+                {dv && (
+                    <Chart
+                        width={w}
+                        height={h}
+                        data={dv}
+                        padding={0}
+                        scale={{
                             x: { nice: false },
                             y: { nice: false },
                         }}
-            >
-              <Coord reflect="y" />
-              <Geom type="point" position="x*y" color="text" shape="cloud" />
-            </Chart>
+                    >
+                        <Coord reflect="y" />
+                        <Geom type="point" position="x*y" color="text" shape="cloud" />
+                    </Chart>
                 )}
-          </div>
+            </div>
         );
     }
 }

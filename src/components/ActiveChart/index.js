@@ -52,42 +52,42 @@ export default class ActiveChart extends Component {
         const { activeData = [] } = this.state;
 
         return (
-          <div className={styles.activeChart}>
-            <NumberInfo subTitle="目标评估" total="有望达到预期" />
-            <div style={{ marginTop: 32 }}>
-              <MiniArea
-                animate={false}
-                line
-                borderWidth={2}
-                height={84}
-                scale={{
+            <div className={styles.activeChart}>
+                <NumberInfo subTitle="目标评估" total="有望达到预期" />
+                <div style={{ marginTop: 32 }}>
+                    <MiniArea
+                        animate={false}
+                        line
+                        borderWidth={2}
+                        height={84}
+                        scale={{
                             y: {
                                 tickCount: 3,
                             },
                         }}
-                yAxis={{
+                        yAxis={{
                             tickLine: false,
                             label: false,
                             title: false,
                             line: false,
                         }}
-                data={activeData}
-              />
-            </div>
-            {activeData && (
-            <div className={styles.activeChartGrid}>
-              <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-              <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
-            </div>
+                        data={activeData}
+                    />
+                </div>
+                {activeData && (
+                    <div className={styles.activeChartGrid}>
+                        <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
+                        <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
+                    </div>
                 )}
-            {activeData && (
-            <div className={styles.activeChartLegend}>
-              <span>00:00</span>
-              <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
-              <span>{activeData[activeData.length - 1].x}</span>
-            </div>
+                {activeData && (
+                    <div className={styles.activeChartLegend}>
+                        <span>00:00</span>
+                        <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
+                        <span>{activeData[activeData.length - 1].x}</span>
+                    </div>
                 )}
-          </div>
+            </div>
         );
     }
 }

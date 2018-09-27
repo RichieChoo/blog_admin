@@ -18,12 +18,12 @@ export default function Result({
     };
     const clsString = classNames(styles.result, className);
     return (
-      <div className={clsString} {...restProps}>
-        <div className={styles.icon}>{iconMap[type]}</div>
-        <div className={styles.title}>{title}</div>
-        {description && <div className={styles.description}>{description}</div>}
-        {extra && <div className={styles.extra}>{extra}</div>}
-        {actions && <div className={styles.actions}>{actions}</div>}
-      </div>
+        <div className={clsString} {...restProps}>
+            <div className={styles.icon}>{iconMap[type]}</div>
+            <div className={styles.title}>{title}</div>
+            {description && <div className={styles.description}>{description}</div>}
+            {extra && <div className={styles.extra}>{extra}</div>}
+            {actions && <div className={styles.actions}>{actions}</div>}
+        </div>
     );
 }

@@ -25,31 +25,31 @@ export default class TopNavHeader extends PureComponent {
         const { theme, contentWidth, logo } = this.props;
         const { maxWidth } = this.state;
         return (
-          <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
-            <div
-              ref={ref => {
+            <div className={`${styles.head} ${theme === 'light' ? styles.light : ''}`}>
+                <div
+                    ref={ref => {
                         this.maim = ref;
                     }}
-              className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
-            >
-              <div className={styles.left}>
-                <div className={styles.logo} key="logo" id="logo">
-                  <Link to="/">
-                    <img src={logo} alt="logo" />
-                    <h1>Richie Blog</h1>
-                  </Link>
-                </div>
-                <div
-                  style={{
+                    className={`${styles.main} ${contentWidth === 'Fixed' ? styles.wide : ''}`}
+                >
+                    <div className={styles.left}>
+                        <div className={styles.logo} key="logo" id="logo">
+                            <Link to="/">
+                                <img src={logo} alt="logo" />
+                                <h1>Richie Blog</h1>
+                            </Link>
+                        </div>
+                        <div
+                            style={{
                                 maxWidth,
                             }}
-                >
-                  <BaseMenu {...this.props} style={{ border: 'none', height: 64 }} />
+                        >
+                            <BaseMenu {...this.props} style={{ border: 'none', height: 64 }} />
+                        </div>
+                    </div>
+                    <RightContent {...this.props} />
                 </div>
-              </div>
-              <RightContent {...this.props} />
             </div>
-          </div>
         );
     }
 }

@@ -35,36 +35,36 @@ class ChartCard extends React.PureComponent {
             return false;
         }
         return (
-          <div className={styles.chartCard}>
-            <div
-              className={classNames(styles.chartTop, {
+            <div className={styles.chartCard}>
+                <div
+                    className={classNames(styles.chartTop, {
                         [styles.chartTopMargin]: !children && !footer,
                     })}
-            >
-              <div className={styles.avatar}>{avatar}</div>
-              <div className={styles.metaWrap}>
-                <div className={styles.meta}>
-                  <span className={styles.title}>{title}</span>
-                  <span className={styles.action}>{action}</span>
+                >
+                    <div className={styles.avatar}>{avatar}</div>
+                    <div className={styles.metaWrap}>
+                        <div className={styles.meta}>
+                            <span className={styles.title}>{title}</span>
+                            <span className={styles.action}>{action}</span>
+                        </div>
+                        {renderTotal(total)}
+                    </div>
                 </div>
-                {renderTotal(total)}
-              </div>
-            </div>
-            {children && (
-            <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
-              <div className={contentHeight && styles.contentFixed}>{children}</div>
-            </div>
+                {children && (
+                    <div className={styles.content} style={{ height: contentHeight || 'auto' }}>
+                        <div className={contentHeight && styles.contentFixed}>{children}</div>
+                    </div>
                 )}
-            {footer && (
-            <div
-              className={classNames(styles.footer, {
+                {footer && (
+                    <div
+                        className={classNames(styles.footer, {
                             [styles.footerMargin]: !children,
                         })}
-            >
-              {footer}
-            </div>
+                    >
+                        {footer}
+                    </div>
                 )}
-          </div>
+            </div>
         );
     };
 
@@ -81,9 +81,9 @@ class ChartCard extends React.PureComponent {
             ...rest
         } = this.props;
         return (
-          <Card loading={loading} bodyStyle={{ padding: '20px 24px 8px 24px' }} {...rest}>
-            {this.renderConnet()}
-          </Card>
+            <Card loading={loading} bodyStyle={{ padding: '20px 24px 8px 24px' }} {...rest}>
+                {this.renderConnet()}
+            </Card>
         );
     }
 }

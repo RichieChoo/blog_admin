@@ -97,31 +97,31 @@ export default class SiderMenu extends PureComponent {
         });
 
         return (
-          <Sider
-            trigger={null}
-            collapsible
-            collapsed={collapsed}
-            breakpoint="lg"
-            onCollapse={onCollapse}
-            width={256}
-            theme={theme}
-            className={siderClassName}
-          >
-            <div className={styles.logo} id="logo">
-              <Link to="/">
-                <img src={logo} alt="logo" />
-                <h1>Richie Blog</h1>
-              </Link>
-            </div>
-            <BaseMenu
-              {...this.props}
-              mode="inline"
-              handleOpenChange={this.handleOpenChange}
-              onOpenChange={this.handleOpenChange}
-              style={{ padding: '16px 0', width: '100%' }}
-              {...defaultProps}
-            />
-          </Sider>
+            <Sider
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+                breakpoint="lg"
+                onCollapse={onCollapse}
+                width={256}
+                theme={theme}
+                className={siderClassName}
+            >
+                <div className={styles.logo} id="logo">
+                    <Link to="/">
+                        <img src={logo} alt="logo" />
+                        <h1>Richie Blog</h1>
+                    </Link>
+                </div>
+                <BaseMenu
+                    {...this.props}
+                    mode="inline"
+                    handleOpenChange={this.handleOpenChange}
+                    onOpenChange={this.handleOpenChange}
+                    style={{ padding: '16px 0', width: '100%' }}
+                    {...defaultProps}
+                />
+            </Sider>
         );
     }
 }

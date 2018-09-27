@@ -96,31 +96,31 @@ class WrapFormItem extends Component {
         if (type === 'Captcha') {
             const inputProps = omit(otherProps, ['onGetCaptcha', 'countDown']);
             return (
-              <FormItem>
-                <Row gutter={8}>
-                  <Col span={16}>
-                    {getFieldDecorator(name, options)(
-                      <Input {...customprops} {...inputProps} />
+                <FormItem>
+                    <Row gutter={8}>
+                        <Col span={16}>
+                            {getFieldDecorator(name, options)(
+                                <Input {...customprops} {...inputProps} />
                             )}
-                  </Col>
-                  <Col span={8}>
-                    <Button
-                      disabled={count}
-                      className={styles.getCaptcha}
-                      size="large"
-                      onClick={this.onGetCaptcha}
-                    >
-                      {count ? `${count} s` : buttonText}
-                    </Button>
-                  </Col>
-                </Row>
-              </FormItem>
+                        </Col>
+                        <Col span={8}>
+                            <Button
+                                disabled={count}
+                                className={styles.getCaptcha}
+                                size="large"
+                                onClick={this.onGetCaptcha}
+                            >
+                                {count ? `${count} s` : buttonText}
+                            </Button>
+                        </Col>
+                    </Row>
+                </FormItem>
             );
         }
         return (
-          <FormItem>
-            {getFieldDecorator(name, options)(<Input {...customprops} {...otherProps} />)}
-          </FormItem>
+            <FormItem>
+                {getFieldDecorator(name, options)(<Input {...customprops} {...otherProps} />)}
+            </FormItem>
         );
     }
 }
@@ -129,18 +129,18 @@ const LoginItem = {};
 Object.keys(ItemMap).forEach(key => {
     const item = ItemMap[key];
     LoginItem[key] = props => (
-      <LoginContext.Consumer>
-        {context => (
-          <WrapFormItem
-            customprops={item.props}
-            {...props}
-            rules={item.rules}
-            type={key}
-            updateActive={context.updateActive}
-            form={context.form}
-          />
+        <LoginContext.Consumer>
+            {context => (
+                <WrapFormItem
+                    customprops={item.props}
+                    {...props}
+                    rules={item.rules}
+                    type={key}
+                    updateActive={context.updateActive}
+                    form={context.form}
+                />
             )}
-      </LoginContext.Consumer>
+        </LoginContext.Consumer>
     );
 });
 

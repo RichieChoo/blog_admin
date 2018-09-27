@@ -98,27 +98,27 @@ class Login extends Component {
             }
         });
         return (
-          <LoginContext.Provider value={this.getContext()}>
-            <div className={classNames(className, styles.login)}>
-              <Form onSubmit={this.handleSubmit}>
-                {tabs.length ? (
-                  <React.Fragment>
-                    <Tabs
-                      animated={false}
-                      className={styles.tabs}
-                      activeKey={type}
-                      onChange={this.onSwitch}
-                    >
-                      {TabChildren}
-                    </Tabs>
-                    {otherChildren}
-                  </React.Fragment>
+            <LoginContext.Provider value={this.getContext()}>
+                <div className={classNames(className, styles.login)}>
+                    <Form onSubmit={this.handleSubmit}>
+                        {tabs.length ? (
+                            <React.Fragment>
+                                <Tabs
+                                    animated={false}
+                                    className={styles.tabs}
+                                    activeKey={type}
+                                    onChange={this.onSwitch}
+                                >
+                                    {TabChildren}
+                                </Tabs>
+                                {otherChildren}
+                            </React.Fragment>
                         ) : (
                             [...children]
                         )}
-              </Form>
-            </div>
-          </LoginContext.Provider>
+                    </Form>
+                </div>
+            </LoginContext.Provider>
         );
     }
 }

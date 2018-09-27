@@ -10,22 +10,22 @@ class PhoneView extends PureComponent {
             values = value.split('-');
         }
         return (
-          <Fragment>
-            <Input
-              className={styles.area_code}
-              value={values[0]}
-              onChange={e => {
+            <Fragment>
+                <Input
+                    className={styles.area_code}
+                    value={values[0]}
+                    onChange={e => {
                         onChange(`${e.target.value}-${values[1]}`);
                     }}
-            />
-            <Input
-              className={styles.phone_number}
-              onChange={e => {
+                />
+                <Input
+                    className={styles.phone_number}
+                    onChange={e => {
                         onChange(`${values[0]}-${e.target.value}`);
                     }}
-              value={values[1]}
-            />
-          </Fragment>
+                    value={values[1]}
+                />
+            </Fragment>
         );
     }
 }

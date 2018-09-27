@@ -44,24 +44,24 @@ export default class NoticeIcon extends PureComponent {
                     ? `${child.props.title} (${child.props.list.length})`
                     : child.props.title;
             return (
-              <TabPane tab={title} key={child.props.title}>
-                <List
-                  {...child.props}
-                  data={child.props.list}
-                  onClick={item => this.onItemClick(item, child.props)}
-                  onClear={() => onClear(child.props.title)}
-                  title={child.props.title}
-                  locale={locale}
-                />
-              </TabPane>
+                <TabPane tab={title} key={child.props.title}>
+                    <List
+                        {...child.props}
+                        data={child.props.list}
+                        onClick={item => this.onItemClick(item, child.props)}
+                        onClear={() => onClear(child.props.title)}
+                        title={child.props.title}
+                        locale={locale}
+                    />
+                </TabPane>
             );
         });
         return (
-          <Spin spinning={loading} delay={0}>
-            <Tabs className={styles.tabs} onChange={this.onTabChange}>
-              {panes}
-            </Tabs>
-          </Spin>
+            <Spin spinning={loading} delay={0}>
+                <Tabs className={styles.tabs} onChange={this.onTabChange}>
+                    {panes}
+                </Tabs>
+            </Spin>
         );
     }
 
@@ -78,11 +78,11 @@ export default class NoticeIcon extends PureComponent {
         const notificationBox = this.getNotificationBox();
         const NoticeBellIcon = bell || <Icon type="bell" className={styles.icon} />;
         const trigger = (
-          <span className={noticeButtonClass}>
-            <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
-              {NoticeBellIcon}
-            </Badge>
-          </span>
+            <span className={noticeButtonClass}>
+                <Badge count={count} style={{ boxShadow: 'none' }} className={styles.badge}>
+                    {NoticeBellIcon}
+                </Badge>
+            </span>
         );
         if (!notificationBox) {
             return trigger;
@@ -92,18 +92,18 @@ export default class NoticeIcon extends PureComponent {
             popoverProps.visible = popupVisible;
         }
         return (
-          <Popover
-            placement="bottomRight"
-            content={notificationBox}
-            popupClassName={styles.popover}
-            trigger="click"
-            arrowPointAtCenter
-            popupAlign={popupAlign}
-            onVisibleChange={onPopupVisibleChange}
-            {...popoverProps}
-          >
-            {trigger}
-          </Popover>
+            <Popover
+                placement="bottomRight"
+                content={notificationBox}
+                popupClassName={styles.popover}
+                trigger="click"
+                arrowPointAtCenter
+                popupAlign={popupAlign}
+                onVisibleChange={onPopupVisibleChange}
+                {...popoverProps}
+            >
+                {trigger}
+            </Popover>
         );
     }
 }

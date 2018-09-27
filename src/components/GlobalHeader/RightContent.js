@@ -29,9 +29,9 @@ export default class GlobalHeaderRight extends PureComponent {
                     doing: 'gold',
                 }[newNotice.status];
                 newNotice.extra = (
-                  <Tag color={color} style={{ marginRight: 0 }}>
-                    {newNotice.extra}
-                  </Tag>
+                    <Tag color={color} style={{ marginRight: 0 }}>
+                        {newNotice.extra}
+                    </Tag>
                 );
             }
             return newNotice;
@@ -51,66 +51,66 @@ export default class GlobalHeaderRight extends PureComponent {
     render() {
         const { currentUser, onMenuClick, theme } = this.props;
         const menu = (
-          <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-            <Menu.Item key="userCenter">
-              <Icon type="user" />
-              <FormattedMessage id="menu.account.center" defaultMessage="account center" />
-            </Menu.Item>
-            <Menu.Item key="logout">
-              <Icon type="logout" />
-              <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
-            </Menu.Item>
-          </Menu>
+            <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
+                <Menu.Item key="userCenter">
+                    <Icon type="user" />
+                    <FormattedMessage id="menu.account.center" defaultMessage="account center" />
+                </Menu.Item>
+                <Menu.Item key="logout">
+                    <Icon type="logout" />
+                    <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
+                </Menu.Item>
+            </Menu>
         );
         let className = styles.right;
         if (theme === 'dark') {
             className = `${styles.right}  ${styles.dark}`;
         }
         return (
-          <div className={className}>
-            <HeaderSearch
-              className={`${styles.action} ${styles.search}`}
-              placeholder={formatMessage({ id: 'component.globalHeader.search' })}
-              dataSource={[
+            <div className={className}>
+                <HeaderSearch
+                    className={`${styles.action} ${styles.search}`}
+                    placeholder={formatMessage({ id: 'component.globalHeader.search' })}
+                    dataSource={[
                         formatMessage({ id: 'component.globalHeader.search.example1' }),
                         formatMessage({ id: 'component.globalHeader.search.example2' }),
                         formatMessage({ id: 'component.globalHeader.search.example3' }),
                     ]}
-              onSearch={value => {
+                    onSearch={value => {
                         console.log('input', value); // eslint-disable-line
                     }}
-              onPressEnter={value => {
+                    onPressEnter={value => {
                         console.log('enter', value); // eslint-disable-line
                     }}
-            />
-            {currentUser.name ? (
-              <Dropdown overlay={menu}>
-                <span className={`${styles.action} ${styles.account}`}>
-                  <Avatar
-                    size="small"
-                    className={styles.avatar}
-                    src={currentUser.avatar}
-                    alt="avatar"
-                  />
-                  <span className={styles.name}>{currentUser.name}</span>
-                </span>
-              </Dropdown>
+                />
+                {currentUser.name ? (
+                    <Dropdown overlay={menu}>
+                        <span className={`${styles.action} ${styles.account}`}>
+                            <Avatar
+                                size="small"
+                                className={styles.avatar}
+                                src={currentUser.avatar}
+                                alt="avatar"
+                            />
+                            <span className={styles.name}>{currentUser.name}</span>
+                        </span>
+                    </Dropdown>
                 ) : (
-                  <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
+                    <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
                 )}
-            <Button
-              size="small"
-              ghost={theme === 'dark'}
-              style={{
+                <Button
+                    size="small"
+                    ghost={theme === 'dark'}
+                    style={{
                         margin: '0 8px',
                     }}
-              onClick={() => {
+                    onClick={() => {
                         this.changLang();
                     }}
-            >
-              <FormattedMessage id="navbar.lang" />
-            </Button>
-          </div>
+                >
+                    <FormattedMessage id="navbar.lang" />
+                </Button>
+            </div>
         );
     }
 }

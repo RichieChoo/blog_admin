@@ -207,73 +207,73 @@ class Pie extends Component {
         });
 
         return (
-          <div ref={this.handleRoot} className={pieClassName} style={style}>
-            <ReactFitText maxFontSize={25}>
-              <div className={styles.chart}>
-                <Chart
-                  scale={scale}
-                  height={height}
-                  forceFit={forceFit}
-                  data={dv}
-                  padding={padding}
-                  animate={animate}
-                  onGetG2Instance={this.getG2Instance}
-                >
-                  {!!tooltip && <Tooltip showTitle={false} />}
-                  <Coord type="theta" innerRadius={inner} />
-                  <Geom
-                    style={{ lineWidth, stroke: '#fff' }}
-                    tooltip={tooltip && tooltipFormat}
-                    type="intervalStack"
-                    position="percent"
-                    color={[
+            <div ref={this.handleRoot} className={pieClassName} style={style}>
+                <ReactFitText maxFontSize={25}>
+                    <div className={styles.chart}>
+                        <Chart
+                            scale={scale}
+                            height={height}
+                            forceFit={forceFit}
+                            data={dv}
+                            padding={padding}
+                            animate={animate}
+                            onGetG2Instance={this.getG2Instance}
+                        >
+                            {!!tooltip && <Tooltip showTitle={false} />}
+                            <Coord type="theta" innerRadius={inner} />
+                            <Geom
+                                style={{ lineWidth, stroke: '#fff' }}
+                                tooltip={tooltip && tooltipFormat}
+                                type="intervalStack"
+                                position="percent"
+                                color={[
                                     'x',
                                     percent || percent === 0 ? formatColor : defaultColors,
                                 ]}
-                    selected={selected}
-                  />
-                </Chart>
+                                selected={selected}
+                            />
+                        </Chart>
 
-                {(subTitle || total) && (
-                <div className={styles.total}>
-                  {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
-                  {/* eslint-disable-next-line */}
+                        {(subTitle || total) && (
+                            <div className={styles.total}>
+                                {subTitle && <h4 className="pie-sub-title">{subTitle}</h4>}
+                                {/* eslint-disable-next-line */}
                                 {total && (
-                                <div className="pie-stat">
-                                  {typeof total === 'function' ? total() : total}
-                                </div>
+                                    <div className="pie-stat">
+                                        {typeof total === 'function' ? total() : total}
+                                    </div>
                                 )}
-                </div>
+                            </div>
                         )}
-              </div>
-            </ReactFitText>
+                    </div>
+                </ReactFitText>
 
-            {hasLegend && (
-            <ul className={styles.legend}>
-              {legendData.map((item, i) => (
-                <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
-                  <span
-                    className={styles.dot}
-                    style={{
+                {hasLegend && (
+                    <ul className={styles.legend}>
+                        {legendData.map((item, i) => (
+                            <li key={item.x} onClick={() => this.handleLegendClick(item, i)}>
+                                <span
+                                    className={styles.dot}
+                                    style={{
                                         backgroundColor: !item.checked ? '#aaa' : item.color,
                                     }}
-                  />
-                  <span className={styles.legendTitle}>{item.x}</span>
-                  <Divider type="vertical" />
-                  <span className={styles.percent}>
-                    {`${(Number.isNaN(item.percent)
+                                />
+                                <span className={styles.legendTitle}>{item.x}</span>
+                                <Divider type="vertical" />
+                                <span className={styles.percent}>
+                                    {`${(Number.isNaN(item.percent)
                                         ? 0
                                         : item.percent * 100
                                     ).toFixed(2)}%`}
-                  </span>
-                  <span className={styles.value}>
-                    {valueFormat ? valueFormat(item.y) : item.y}
-                  </span>
-                </li>
+                                </span>
+                                <span className={styles.value}>
+                                    {valueFormat ? valueFormat(item.y) : item.y}
+                                </span>
+                            </li>
                         ))}
-            </ul>
+                    </ul>
                 )}
-          </div>
+            </div>
         );
     }
 }
