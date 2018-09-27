@@ -1,2 +1,2 @@
 # tp
-template project by ant design pro 2.0
+template project by Richie Blog 2.0
