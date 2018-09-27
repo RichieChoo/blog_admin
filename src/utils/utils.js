@@ -158,10 +158,10 @@ export function formatWan(val) {
     if (val > 10000) {
         result = Math.floor(val / 10000);
         result = (
-            <span>
-                {result}
-                <span
-                    styles={{
+          <span>
+            {result}
+            <span
+              styles={{
                         position: 'relative',
                         top: -2,
                         fontSize: 14,
@@ -169,10 +169,10 @@ export function formatWan(val) {
                         lineHeight: 20,
                         marginLeft: 2,
                     }}
-                >
+            >
                     万
-                </span>
             </span>
+          </span>
         );
     }
     return result;

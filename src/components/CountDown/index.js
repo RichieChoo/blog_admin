@@ -72,9 +72,9 @@ class CountDown extends Component {
         const m = Math.floor((time - h * hours) / minutes);
         const s = Math.floor((time - h * hours - m * minutes) / 1000);
         return (
-            <span>
-                {fixedZero(h)}:{fixedZero(m)}:{fixedZero(s)}
-            </span>
+          <span>
+            {fixedZero(h)}:{fixedZero(m)}:{fixedZero(s)}
+          </span>
         );
     };
 

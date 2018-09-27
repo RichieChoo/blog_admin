@@ -17,25 +17,25 @@ class Info extends Component {
         const { match, location } = props;
         const menuMap = {
             base: (
-                <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />
+              <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />
             ),
             security: (
-                <FormattedMessage
-                    id="app.settings.menuMap.security"
-                    defaultMessage="Security Settings"
-                />
+              <FormattedMessage
+                id="app.settings.menuMap.security"
+                defaultMessage="Security Settings"
+              />
             ),
             binding: (
-                <FormattedMessage
-                    id="app.settings.menuMap.binding"
-                    defaultMessage="Account Binding"
-                />
+              <FormattedMessage
+                id="app.settings.menuMap.binding"
+                defaultMessage="Account Binding"
+              />
             ),
             notification: (
-                <FormattedMessage
-                    id="app.settings.menuMap.notification"
-                    defaultMessage="New Message Notification"
-                />
+              <FormattedMessage
+                id="app.settings.menuMap.notification"
+                defaultMessage="New Message Notification"
+              />
             ),
         };
         const key = location.pathname.replace(`${match.path}/`, '');
@@ -108,24 +108,24 @@ class Info extends Component {
         }
         const { mode, selectKey } = this.state;
         return (
-            <GridContent>
-                <div
-                    className={styles.main}
-                    ref={ref => {
+          <GridContent>
+            <div
+              className={styles.main}
+              ref={ref => {
                         this.main = ref;
                     }}
-                >
-                    <div className={styles.leftmenu}>
-                        <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
-                            {this.getmenu()}
-                        </Menu>
-                    </div>
-                    <div className={styles.right}>
-                        <div className={styles.title}>{this.getRightTitle()}</div>
-                        {children}
-                    </div>
-                </div>
-            </GridContent>
+            >
+              <div className={styles.leftmenu}>
+                <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
+                  {this.getmenu()}
+                </Menu>
+              </div>
+              <div className={styles.right}>
+                <div className={styles.title}>{this.getRightTitle()}</div>
+                {children}
+              </div>
+            </div>
+          </GridContent>
         );
     }
 }

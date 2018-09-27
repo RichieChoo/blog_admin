@@ -11,15 +11,15 @@ import BlockChecbox from './BlockChecbox';
 const { Option } = Select;
 
 const Body = ({ children, title, style }) => (
-    <div
-        style={{
+  <div
+    style={{
             ...style,
             marginBottom: 24,
         }}
-    >
-        <h3 className={styles.title}>{title}</h3>
-        {children}
-    </div>
+  >
+    <h3 className={styles.title}>{title}</h3>
+    {children}
+  </div>
 );
 
 @connect(({ setting }) => ({ setting }))
@@ -36,31 +36,31 @@ class SettingDrawer extends PureComponent {
             {
                 title: formatMessage({ id: 'app.setting.content-width' }),
                 action: (
-                    <Select
-                        value={contentWidth}
-                        size="small"
-                        onSelect={value => this.changeSetting('contentWidth', value)}
-                        style={{ width: 80 }}
-                    >
-                        {layout === 'sidemenu' ? null : (
-                            <Option value="Fixed">
-                                {formatMessage({ id: 'app.setting.content-width.fixed' })}
-                            </Option>
+                  <Select
+                    value={contentWidth}
+                    size="small"
+                    onSelect={value => this.changeSetting('contentWidth', value)}
+                    style={{ width: 80 }}
+                  >
+                    {layout === 'sidemenu' ? null : (
+                      <Option value="Fixed">
+                        {formatMessage({ id: 'app.setting.content-width.fixed' })}
+                      </Option>
                         )}
-                        <Option value="Fluid">
-                            {formatMessage({ id: 'app.setting.content-width.fluid' })}
-                        </Option>
-                    </Select>
+                    <Option value="Fluid">
+                      {formatMessage({ id: 'app.setting.content-width.fluid' })}
+                    </Option>
+                  </Select>
                 ),
             },
             {
                 title: formatMessage({ id: 'app.setting.fixedheader' }),
                 action: (
-                    <Switch
-                        size="small"
-                        checked={!!fixedHeader}
-                        onChange={checked => this.changeSetting('fixedHeader', checked)}
-                    />
+                  <Switch
+                    size="small"
+                    checked={!!fixedHeader}
+                    onChange={checked => this.changeSetting('fixedHeader', checked)}
+                  />
                 ),
             },
             {
@@ -68,11 +68,11 @@ class SettingDrawer extends PureComponent {
                 disabled: !fixedHeader,
                 disabledReason: formatMessage({ id: 'app.setting.hideheader.hint' }),
                 action: (
-                    <Switch
-                        size="small"
-                        checked={!!autoHideHeader}
-                        onChange={checked => this.changeSetting('autoHideHeader', checked)}
-                    />
+                  <Switch
+                    size="small"
+                    checked={!!autoHideHeader}
+                    onChange={checked => this.changeSetting('autoHideHeader', checked)}
+                  />
                 ),
             },
             {
@@ -80,11 +80,11 @@ class SettingDrawer extends PureComponent {
                 disabled: layout === 'topmenu',
                 disabledReason: formatMessage({ id: 'app.setting.fixedsidebar.hint' }),
                 action: (
-                    <Switch
-                        size="small"
-                        checked={!!fixSiderbar}
-                        onChange={checked => this.changeSetting('fixSiderbar', checked)}
-                    />
+                  <Switch
+                    size="small"
+                    checked={!!fixSiderbar}
+                    onChange={checked => this.changeSetting('fixSiderbar', checked)}
+                  />
                 ),
             },
         ];
@@ -118,11 +118,11 @@ class SettingDrawer extends PureComponent {
             disabled: item.disabled,
         });
         return (
-            <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
-                <List.Item actions={[action]}>
-                    <span style={{ opacity: item.disabled ? '0.5' : '' }}>{item.title}</span>
-                </List.Item>
-            </Tooltip>
+          <Tooltip title={item.disabled ? item.disabledReason : ''} placement="left">
+            <List.Item actions={[action]}>
+              <span style={{ opacity: item.disabled ? '0.5' : '' }}>{item.title}</span>
+            </List.Item>
+          </Tooltip>
         );
     };
 
@@ -131,31 +131,31 @@ class SettingDrawer extends PureComponent {
         const { navTheme, primaryColor, layout, colorWeak } = setting;
         const { collapse } = this.state;
         return (
-            <Drawer
-                visible={collapse}
-                width={300}
-                onClose={this.togglerContent}
-                placement="right"
-                handler={
-                    <div className={styles.handle}>
-                        <Icon
-                            type={collapse ? 'close' : 'setting'}
-                            style={{
+          <Drawer
+            visible={collapse}
+            width={300}
+            onClose={this.togglerContent}
+            placement="right"
+            handler={
+              <div className={styles.handle}>
+                <Icon
+                  type={collapse ? 'close' : 'setting'}
+                  style={{
                                 color: '#fff',
                                 fontSize: 20,
                             }}
-                        />
-                    </div>
+                />
+              </div>
                 }
-                onHandleClick={this.togglerContent}
-                style={{
+            onHandleClick={this.togglerContent}
+            style={{
                     zIndex: 999,
                 }}
-            >
-                <div className={styles.content}>
-                    <Body title={formatMessage({ id: 'app.setting.pagestyle' })}>
-                        <BlockChecbox
-                            list={[
+          >
+            <div className={styles.content}>
+              <Body title={formatMessage({ id: 'app.setting.pagestyle' })}>
+                <BlockChecbox
+                  list={[
                                 {
                                     key: 'dark',
                                     url:
@@ -169,22 +169,22 @@ class SettingDrawer extends PureComponent {
                                     title: formatMessage({ id: 'app.setting.pagestyle.light' }),
                                 },
                             ]}
-                            value={navTheme}
-                            onChange={value => this.changeSetting('navTheme', value)}
-                        />
-                    </Body>
+                  value={navTheme}
+                  onChange={value => this.changeSetting('navTheme', value)}
+                />
+              </Body>
 
-                    <ThemeColor
-                        title={formatMessage({ id: 'app.setting.themecolor' })}
-                        value={primaryColor}
-                        onChange={color => this.changeSetting('primaryColor', color)}
-                    />
+              <ThemeColor
+                title={formatMessage({ id: 'app.setting.themecolor' })}
+                value={primaryColor}
+                onChange={color => this.changeSetting('primaryColor', color)}
+              />
 
-                    <Divider />
+              <Divider />
 
-                    <Body title={formatMessage({ id: 'app.setting.navigationmode' })}>
-                        <BlockChecbox
-                            list={[
+              <Body title={formatMessage({ id: 'app.setting.navigationmode' })}>
+                <BlockChecbox
+                  list={[
                                 {
                                     key: 'sidemenu',
                                     url:
@@ -198,61 +198,61 @@ class SettingDrawer extends PureComponent {
                                     title: formatMessage({ id: 'app.setting.topmenu' }),
                                 },
                             ]}
-                            value={layout}
-                            onChange={value => this.changeSetting('layout', value)}
-                        />
-                    </Body>
+                  value={layout}
+                  onChange={value => this.changeSetting('layout', value)}
+                />
+              </Body>
 
-                    <List
-                        split={false}
-                        dataSource={this.getLayoutSetting()}
-                        renderItem={this.renderLayoutSettingItem}
-                    />
+              <List
+                split={false}
+                dataSource={this.getLayoutSetting()}
+                renderItem={this.renderLayoutSettingItem}
+              />
 
-                    <Divider />
+              <Divider />
 
-                    <Body title={formatMessage({ id: 'app.setting.othersettings' })}>
-                        <List.Item
-                            actions={[
-                                <Switch
-                                    size="small"
-                                    checked={!!colorWeak}
-                                    onChange={checked => this.changeSetting('colorWeak', checked)}
-                                />,
+              <Body title={formatMessage({ id: 'app.setting.othersettings' })}>
+                <List.Item
+                  actions={[
+                    <Switch
+                      size="small"
+                      checked={!!colorWeak}
+                      onChange={checked => this.changeSetting('colorWeak', checked)}
+                    />,
                             ]}
-                        >
-                            {formatMessage({ id: 'app.setting.weakmode' })}
-                        </List.Item>
-                    </Body>
-                    <Divider />
-                    <CopyToClipboard
-                        text={JSON.stringify(omit(setting, ['colorWeak']), null, 2)}
-                        onCopy={() =>
+                >
+                  {formatMessage({ id: 'app.setting.weakmode' })}
+                </List.Item>
+              </Body>
+              <Divider />
+              <CopyToClipboard
+                text={JSON.stringify(omit(setting, ['colorWeak']), null, 2)}
+                onCopy={() =>
                             message.success(formatMessage({ id: 'app.setting.copyinfo' }))
                         }
+              >
+                <Button block icon="copy">
+                  {formatMessage({ id: 'app.setting.copy' })}
+                </Button>
+              </CopyToClipboard>
+              <Alert
+                type="warning"
+                className={styles.productionHint}
+                message={
+                  <div>
+                    {formatMessage({ id: 'app.setting.production.hint' })}{' '}
+                    <a
+                      href="https://u.ant.design/pro-v2-default-settings"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                        <Button block icon="copy">
-                            {formatMessage({ id: 'app.setting.copy' })}
-                        </Button>
-                    </CopyToClipboard>
-                    <Alert
-                        type="warning"
-                        className={styles.productionHint}
-                        message={
-                            <div>
-                                {formatMessage({ id: 'app.setting.production.hint' })}{' '}
-                                <a
-                                    href="https://u.ant.design/pro-v2-default-settings"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
                                     src/defaultSettings.js
-                                </a>
-                            </div>
+                    </a>
+                  </div>
                         }
-                    />
-                </div>
-            </Drawer>
+              />
+            </div>
+          </Drawer>
         );
     }
 }

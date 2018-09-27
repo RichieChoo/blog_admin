@@ -96,126 +96,126 @@ class Center extends PureComponent {
             {
                 key: 'articles',
                 tab: (
-                    <span>
+                  <span>
                         文章 <span style={{ fontSize: 14 }}>(8)</span>
-                    </span>
+                  </span>
                 ),
             },
             {
                 key: 'applications',
                 tab: (
-                    <span>
+                  <span>
                         应用 <span style={{ fontSize: 14 }}>(8)</span>
-                    </span>
+                  </span>
                 ),
             },
             {
                 key: 'projects',
                 tab: (
-                    <span>
+                  <span>
                         项目 <span style={{ fontSize: 14 }}>(8)</span>
-                    </span>
+                  </span>
                 ),
             },
         ];
 
         return (
-            <GridContent className={styles.userCenter}>
-                <Row gutter={24}>
-                    <Col lg={7} md={24}>
-                        <Card
-                            bordered={false}
-                            style={{ marginBottom: 24 }}
-                            loading={currentUserLoading}
-                        >
-                            {currentUser && Object.keys(currentUser).length ? (
-                                <div>
-                                    <div className={styles.avatarHolder}>
-                                        <img alt="" src={currentUser.avatar} />
-                                        <div className={styles.name}>{currentUser.name}</div>
-                                        <div>{currentUser.signature}</div>
-                                    </div>
-                                    <div className={styles.detail}>
-                                        <p>
-                                            <i className={styles.title} />
-                                            {currentUser.title}
-                                        </p>
-                                        <p>
-                                            <i className={styles.group} />
-                                            {currentUser.group}
-                                        </p>
-                                        <p>
-                                            <i className={styles.address} />
-                                            {currentUser.geographic.province.label}
-                                            {currentUser.geographic.city.label}
-                                        </p>
-                                    </div>
-                                    <Divider dashed />
-                                    <div className={styles.tags}>
-                                        <div className={styles.tagsTitle}>标签</div>
-                                        {currentUser.tags.concat(newTags).map(item => (
-                                            <Tag key={item.key}>{item.label}</Tag>
+          <GridContent className={styles.userCenter}>
+            <Row gutter={24}>
+              <Col lg={7} md={24}>
+                <Card
+                  bordered={false}
+                  style={{ marginBottom: 24 }}
+                  loading={currentUserLoading}
+                >
+                  {currentUser && Object.keys(currentUser).length ? (
+                    <div>
+                      <div className={styles.avatarHolder}>
+                        <img alt="" src={currentUser.avatar} />
+                        <div className={styles.name}>{currentUser.name}</div>
+                        <div>{currentUser.signature}</div>
+                      </div>
+                      <div className={styles.detail}>
+                        <p>
+                          <i className={styles.title} />
+                          {currentUser.title}
+                        </p>
+                        <p>
+                          <i className={styles.group} />
+                          {currentUser.group}
+                        </p>
+                        <p>
+                          <i className={styles.address} />
+                          {currentUser.geographic.province.label}
+                          {currentUser.geographic.city.label}
+                        </p>
+                      </div>
+                      <Divider dashed />
+                      <div className={styles.tags}>
+                        <div className={styles.tagsTitle}>标签</div>
+                        {currentUser.tags.concat(newTags).map(item => (
+                          <Tag key={item.key}>{item.label}</Tag>
                                         ))}
-                                        {inputVisible && (
-                                            <Input
-                                                ref={this.saveInputRef}
-                                                type="text"
-                                                size="small"
-                                                style={{ width: 78 }}
-                                                value={inputValue}
-                                                onChange={this.handleInputChange}
-                                                onBlur={this.handleInputConfirm}
-                                                onPressEnter={this.handleInputConfirm}
-                                            />
+                        {inputVisible && (
+                        <Input
+                          ref={this.saveInputRef}
+                          type="text"
+                          size="small"
+                          style={{ width: 78 }}
+                          value={inputValue}
+                          onChange={this.handleInputChange}
+                          onBlur={this.handleInputConfirm}
+                          onPressEnter={this.handleInputConfirm}
+                        />
                                         )}
-                                        {!inputVisible && (
-                                            <Tag
-                                                onClick={this.showInput}
-                                                style={{
+                        {!inputVisible && (
+                        <Tag
+                          onClick={this.showInput}
+                          style={{
                                                     background: '#fff',
                                                     borderStyle: 'dashed',
                                                 }}
-                                            >
-                                                <Icon type="plus" />
-                                            </Tag>
+                        >
+                          <Icon type="plus" />
+                        </Tag>
                                         )}
-                                    </div>
-                                    <Divider style={{ marginTop: 16 }} dashed />
-                                    <div className={styles.team}>
-                                        <div className={styles.teamTitle}>团队</div>
-                                        <Spin spinning={projectLoading}>
-                                            <Row gutter={36}>
-                                                {notice.map(item => (
-                                                    <Col key={item.id} lg={24} xl={12}>
-                                                        <Link to={item.href}>
-                                                            <Avatar size="small" src={item.logo} />
-                                                            {item.member}
-                                                        </Link>
-                                                    </Col>
+                      </div>
+                      <Divider style={{ marginTop: 16 }} dashed />
+                      <div className={styles.team}>
+                        <div className={styles.teamTitle}>团队</div>
+                        <Spin spinning={projectLoading}>
+                          <Row gutter={36}>
+                            {notice.map(item => (
+                                <Col key={item.id} lg={24} xl={12}>
+                                    <Link to={item.href}>
+                                        <Avatar size="small" src={item.logo} />
+                                        {item.member}
+                                      </Link>
+                                  </Col>
                                                 ))}
-                                            </Row>
-                                        </Spin>
-                                    </div>
-                                </div>
+                          </Row>
+                        </Spin>
+                      </div>
+                    </div>
                             ) : (
                                 'loading...'
                             )}
-                        </Card>
-                    </Col>
-                    <Col lg={17} md={24}>
-                        <Card
-                            className={styles.tabsCard}
-                            bordered={false}
-                            tabList={operationTabList}
-                            activeTabKey={location.pathname.replace(`${match.path}/`, '')}
-                            onTabChange={this.onTabChange}
-                            loading={listLoading}
-                        >
-                            {children}
-                        </Card>
-                    </Col>
-                </Row>
-            </GridContent>
+                </Card>
+              </Col>
+              <Col lg={17} md={24}>
+                <Card
+                  className={styles.tabsCard}
+                  bordered={false}
+                  tabList={operationTabList}
+                  activeTabKey={location.pathname.replace(`${match.path}/`, '')}
+                  onTabChange={this.onTabChange}
+                  loading={listLoading}
+                >
+                  {children}
+                </Card>
+              </Col>
+            </Row>
+          </GridContent>
         );
     }
 }

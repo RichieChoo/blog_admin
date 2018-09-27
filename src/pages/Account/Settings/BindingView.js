@@ -8,9 +8,9 @@ class BindingView extends Component {
             title: formatMessage({ id: 'app.settings.binding.taobao' }, {}),
             description: formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
             actions: [
-                <a>
-                    <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
-                </a>,
+              <a>
+                <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+              </a>,
             ],
             avatar: <Icon type="taobao" className="taobao" />,
         },
@@ -18,9 +18,9 @@ class BindingView extends Component {
             title: formatMessage({ id: 'app.settings.binding.alipay' }, {}),
             description: formatMessage({ id: 'app.settings.binding.alipay-description' }, {}),
             actions: [
-                <a>
-                    <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
-                </a>,
+              <a>
+                <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+              </a>,
             ],
             avatar: <Icon type="alipay" className="alipay" />,
         },
@@ -28,9 +28,9 @@ class BindingView extends Component {
             title: formatMessage({ id: 'app.settings.binding.dingding' }, {}),
             description: formatMessage({ id: 'app.settings.binding.dingding-description' }, {}),
             actions: [
-                <a>
-                    <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
-                </a>,
+              <a>
+                <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
+              </a>,
             ],
             avatar: <Icon type="dingding" className="dingding" />,
         },
@@ -38,21 +38,21 @@ class BindingView extends Component {
 
     render() {
         return (
-            <Fragment>
-                <List
-                    itemLayout="horizontal"
-                    dataSource={this.getData()}
-                    renderItem={item => (
-                        <List.Item actions={item.actions}>
-                            <List.Item.Meta
-                                avatar={item.avatar}
-                                title={item.title}
-                                description={item.description}
-                            />
-                        </List.Item>
+          <Fragment>
+            <List
+              itemLayout="horizontal"
+              dataSource={this.getData()}
+              renderItem={item => (
+                <List.Item actions={item.actions}>
+                  <List.Item.Meta
+                    avatar={item.avatar}
+                    title={item.title}
+                    description={item.description}
+                  />
+                </List.Item>
                     )}
-                />
-            </Fragment>
+            />
+          </Fragment>
         );
     }
 }

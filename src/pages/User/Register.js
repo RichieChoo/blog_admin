@@ -148,15 +148,15 @@ class Register extends Component {
         const value = form.getFieldValue('password');
         const passwordStatus = this.getPasswordStatus();
         return value && value.length ? (
-            <div className={styles[`progress-${passwordStatus}`]}>
-                <Progress
-                    status={passwordProgressMap[passwordStatus]}
-                    className={styles.progress}
-                    strokeWidth={6}
-                    percent={value.length * 10 > 100 ? 100 : value.length * 10}
-                    showInfo={false}
-                />
-            </div>
+          <div className={styles[`progress-${passwordStatus}`]}>
+            <Progress
+              status={passwordProgressMap[passwordStatus]}
+              className={styles.progress}
+              strokeWidth={6}
+              percent={value.length * 10 > 100 ? 100 : value.length * 10}
+              showInfo={false}
+            />
+          </div>
         ) : null;
     };
 
@@ -165,11 +165,11 @@ class Register extends Component {
         const { getFieldDecorator } = form;
         const { count, prefix, help, visible } = this.state;
         return (
-            <div className={styles.main}>
-                <h3>注册</h3>
-                <Form onSubmit={this.handleSubmit}>
-                    <FormItem>
-                        {getFieldDecorator('mail', {
+          <div className={styles.main}>
+            <h3>注册</h3>
+            <Form onSubmit={this.handleSubmit}>
+              <FormItem>
+                {getFieldDecorator('mail', {
                             rules: [
                                 {
                                     required: true,
@@ -181,39 +181,39 @@ class Register extends Component {
                                 },
                             ],
                         })(<Input size="large" placeholder="邮箱" />)}
-                    </FormItem>
-                    <FormItem help={help}>
-                        <Popover
-                            content={
-                                <div style={{ padding: '4px 0' }}>
-                                    {passwordStatusMap[this.getPasswordStatus()]}
-                                    {this.renderPasswordProgress()}
-                                    <div style={{ marginTop: 10 }}>
+              </FormItem>
+              <FormItem help={help}>
+                <Popover
+                  content={
+                    <div style={{ padding: '4px 0' }}>
+                      {passwordStatusMap[this.getPasswordStatus()]}
+                      {this.renderPasswordProgress()}
+                      <div style={{ marginTop: 10 }}>
                                         请至少输入 6 个字符。请不要使用容易被猜到的密码。
-                                    </div>
-                                </div>
+                      </div>
+                    </div>
                             }
-                            overlayStyle={{ width: 240 }}
-                            placement="right"
-                            visible={visible}
-                        >
-                            {getFieldDecorator('password', {
+                  overlayStyle={{ width: 240 }}
+                  placement="right"
+                  visible={visible}
+                >
+                  {getFieldDecorator('password', {
                                 rules: [
                                     {
                                         validator: this.checkPassword,
                                     },
                                 ],
                             })(
-                                <Input
-                                    size="large"
-                                    type="password"
-                                    placeholder="至少6位密码，区分大小写"
-                                />
+                              <Input
+                                size="large"
+                                type="password"
+                                placeholder="至少6位密码，区分大小写"
+                              />
                             )}
-                        </Popover>
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('confirm', {
+                </Popover>
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('confirm', {
                             rules: [
                                 {
                                     required: true,
@@ -224,19 +224,19 @@ class Register extends Component {
                                 },
                             ],
                         })(<Input size="large" type="password" placeholder="确认密码" />)}
-                    </FormItem>
-                    <FormItem>
-                        <InputGroup compact>
-                            <Select
-                                size="large"
-                                value={prefix}
-                                onChange={this.changePrefix}
-                                style={{ width: '20%' }}
-                            >
-                                <Option value="86">+86</Option>
-                                <Option value="87">+87</Option>
-                            </Select>
-                            {getFieldDecorator('mobile', {
+              </FormItem>
+              <FormItem>
+                <InputGroup compact>
+                  <Select
+                    size="large"
+                    value={prefix}
+                    onChange={this.changePrefix}
+                    style={{ width: '20%' }}
+                  >
+                    <Option value="86">+86</Option>
+                    <Option value="87">+87</Option>
+                  </Select>
+                  {getFieldDecorator('mobile', {
                                 rules: [
                                     {
                                         required: true,
@@ -248,18 +248,18 @@ class Register extends Component {
                                     },
                                 ],
                             })(
-                                <Input
-                                    size="large"
-                                    style={{ width: '80%' }}
-                                    placeholder="11位手机号"
-                                />
+                              <Input
+                                size="large"
+                                style={{ width: '80%' }}
+                                placeholder="11位手机号"
+                              />
                             )}
-                        </InputGroup>
-                    </FormItem>
-                    <FormItem>
-                        <Row gutter={8}>
-                            <Col span={16}>
-                                {getFieldDecorator('captcha', {
+                </InputGroup>
+              </FormItem>
+              <FormItem>
+                <Row gutter={8}>
+                  <Col span={16}>
+                    {getFieldDecorator('captcha', {
                                     rules: [
                                         {
                                             required: true,
@@ -267,35 +267,35 @@ class Register extends Component {
                                         },
                                     ],
                                 })(<Input size="large" placeholder="验证码" />)}
-                            </Col>
-                            <Col span={8}>
-                                <Button
-                                    size="large"
-                                    disabled={count}
-                                    className={styles.getCaptcha}
-                                    onClick={this.onGetCaptcha}
-                                >
-                                    {count ? `${count} s` : '获取验证码'}
-                                </Button>
-                            </Col>
-                        </Row>
-                    </FormItem>
-                    <FormItem>
-                        <Button
-                            size="large"
-                            loading={submitting}
-                            className={styles.submit}
-                            type="primary"
-                            htmlType="submit"
-                        >
+                  </Col>
+                  <Col span={8}>
+                    <Button
+                      size="large"
+                      disabled={count}
+                      className={styles.getCaptcha}
+                      onClick={this.onGetCaptcha}
+                    >
+                      {count ? `${count} s` : '获取验证码'}
+                    </Button>
+                  </Col>
+                </Row>
+              </FormItem>
+              <FormItem>
+                <Button
+                  size="large"
+                  loading={submitting}
+                  className={styles.submit}
+                  type="primary"
+                  htmlType="submit"
+                >
                             注册
-                        </Button>
-                        <Link className={styles.login} to="/User/Login">
+                </Button>
+                <Link className={styles.login} to="/User/Login">
                             使用已有账户登录
-                        </Link>
-                    </FormItem>
-                </Form>
-            </div>
+                </Link>
+              </FormItem>
+            </Form>
+          </div>
         );
     }
 }

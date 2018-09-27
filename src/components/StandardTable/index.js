@@ -85,41 +85,41 @@ class StandardTable extends PureComponent {
         };
 
         return (
-            <div className={styles.standardTable}>
-                <div className={styles.tableAlert}>
-                    <Alert
-                        message={
-                            <Fragment>
+          <div className={styles.standardTable}>
+            <div className={styles.tableAlert}>
+              <Alert
+                message={
+                  <Fragment>
                                 已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}
                                 项&nbsp;&nbsp;
-                                {needTotalList.map(item => (
-                                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>
-                                        {item.title}
+                    {needTotalList.map(item => (
+                      <span style={{ marginLeft: 8 }} key={item.dataIndex}>
+                        {item.title}
                                         总计&nbsp;
-                                        <span style={{ fontWeight: 600 }}>
-                                            {item.render ? item.render(item.total) : item.total}
-                                        </span>
-                                    </span>
+                        <span style={{ fontWeight: 600 }}>
+                          {item.render ? item.render(item.total) : item.total}
+                        </span>
+                      </span>
                                 ))}
-                                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
+                    <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
                                     清空
-                                </a>
-                            </Fragment>
+                    </a>
+                  </Fragment>
                         }
-                        type="info"
-                        showIcon
-                    />
-                </div>
-                <Table
-                    loading={loading}
-                    rowKey={rowKey || 'key'}
-                    rowSelection={rowSelection}
-                    dataSource={list}
-                    columns={columns}
-                    pagination={paginationProps}
-                    onChange={this.handleTableChange}
-                />
+                type="info"
+                showIcon
+              />
             </div>
+            <Table
+              loading={loading}
+              rowKey={rowKey || 'key'}
+              rowSelection={rowSelection}
+              dataSource={list}
+              columns={columns}
+              pagination={paginationProps}
+              onChange={this.handleTableChange}
+            />
+          </div>
         );
     }
 }

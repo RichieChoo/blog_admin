@@ -45,34 +45,34 @@ class SearchList extends Component {
         ];
 
         const mainSearch = (
-            <div style={{ textAlign: 'center' }}>
-                <Input.Search
-                    placeholder="请输入"
-                    enterButton="搜索"
-                    size="large"
-                    onSearch={this.handleFormSubmit}
-                    style={{ width: 522 }}
-                />
-            </div>
+          <div style={{ textAlign: 'center' }}>
+            <Input.Search
+              placeholder="请输入"
+              enterButton="搜索"
+              size="large"
+              onSearch={this.handleFormSubmit}
+              style={{ width: 522 }}
+            />
+          </div>
         );
 
         const { match, children, location } = this.props;
 
         return (
-            <PageHeaderWrapper
-                title="搜索列表"
-                content={mainSearch}
-                tabList={tabList}
-                tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
-                onTabChange={this.handleTabChange}
-            >
-                {children}
-                {/* <Switch>
+          <PageHeaderWrapper
+            title="搜索列表"
+            content={mainSearch}
+            tabList={tabList}
+            tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
+            onTabChange={this.handleTabChange}
+          >
+            {children}
+            {/* <Switch>
           {routes.map(item => (
             <Route key={item.key} path={item.path} component={item.component} exact={item.exact} />
           ))}
         </Switch> */}
-            </PageHeaderWrapper>
+          </PageHeaderWrapper>
         );
     }
 }

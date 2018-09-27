@@ -59,62 +59,62 @@ class LoginPage extends Component {
     };
 
     renderMessage = content => (
-        <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
+      <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
     );
 
     render() {
         const { login, submitting } = this.props;
         const { type, autoLogin } = this.state;
         return (
-            <div className={styles.main}>
-                <Login
-                    defaultActiveKey={type}
-                    onTabChange={this.onTabChange}
-                    onSubmit={this.handleSubmit}
-                    ref={form => {
+          <div className={styles.main}>
+            <Login
+              defaultActiveKey={type}
+              onTabChange={this.onTabChange}
+              onSubmit={this.handleSubmit}
+              ref={form => {
                         this.loginForm = form;
                     }}
-                >
-                    <Tab key="account" tab="账户密码登录">
-                        {login.status === 'error' &&
+            >
+              <Tab key="account" tab="账户密码登录">
+                {login.status === 'error' &&
                             login.type === 'account' &&
                             !submitting &&
                             this.renderMessage('账户或密码错误（admin/888888）')}
-                        <UserName name="userName" placeholder="admin/user" />
-                        <Password
-                            name="password"
-                            placeholder="888888/123456"
-                            onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
-                        />
-                    </Tab>
-                    <Tab key="mobile" tab="手机号登录">
-                        {login.status === 'error' &&
+                <UserName name="userName" placeholder="admin/user" />
+                <Password
+                  name="password"
+                  placeholder="888888/123456"
+                  onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+                />
+              </Tab>
+              <Tab key="mobile" tab="手机号登录">
+                {login.status === 'error' &&
                             login.type === 'mobile' &&
                             !submitting &&
                             this.renderMessage('验证码错误')}
-                        <Mobile name="mobile" />
-                        <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
-                    </Tab>
-                    <div>
-                        <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
+                <Mobile name="mobile" />
+                <Captcha name="captcha" countDown={120} onGetCaptcha={this.onGetCaptcha} />
+              </Tab>
+              <div>
+                <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
                             自动登录
-                        </Checkbox>
-                        <a style={{ float: 'right' }} href="">
+                </Checkbox>
+                <a style={{ float: 'right' }} href="">
                             忘记密码
-                        </a>
-                    </div>
-                    <Submit loading={submitting}>登录</Submit>
-                    <div className={styles.other}>
+                </a>
+              </div>
+              <Submit loading={submitting}>登录</Submit>
+              <div className={styles.other}>
                         其他登录方式
-                        <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
-                        <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
-                        <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
-                        <Link className={styles.register} to="/User/Register">
+                <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
+                <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
+                <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
+                <Link className={styles.register} to="/User/Register">
                             注册账户
-                        </Link>
-                    </div>
-                </Login>
-            </div>
+                </Link>
+              </div>
+            </Login>
+          </div>
         );
     }
 }

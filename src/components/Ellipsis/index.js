@@ -58,20 +58,20 @@ const EllipsisText = ({ text, length, tooltip, fullWidthRecognition, ...other })
 
     if (tooltip) {
         return (
-            <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
-                <span>
-                    {displayText}
-                    {tail}
-                </span>
-            </Tooltip>
+          <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
+            <span>
+              {displayText}
+              {tail}
+            </span>
+          </Tooltip>
         );
     }
 
     return (
-        <span {...other}>
-            {displayText}
-            {tail}
-        </span>
+      <span {...other}>
+        {displayText}
+        {tail}
+      </span>
     );
 };
 
@@ -199,23 +199,23 @@ export default class Ellipsis extends Component {
 
         if (!lines && !length) {
             return (
-                <span className={cls} {...restProps}>
-                    {children}
-                </span>
+              <span className={cls} {...restProps}>
+                {children}
+              </span>
             );
         }
 
         // length
         if (!lines) {
             return (
-                <EllipsisText
-                    className={cls}
-                    length={length}
-                    text={children || ''}
-                    tooltip={tooltip}
-                    fullWidthRecognition={fullWidthRecognition}
-                    {...restProps}
-                />
+              <EllipsisText
+                className={cls}
+                length={length}
+                text={children || ''}
+                tooltip={tooltip}
+                fullWidthRecognition={fullWidthRecognition}
+                {...restProps}
+              />
             );
         }
 
@@ -228,46 +228,46 @@ export default class Ellipsis extends Component {
             const style = `#${id}{-webkit-line-clamp:${lines};-webkit-box-orient: vertical;}`;
 
             const node = (
-                <div id={id} className={cls} {...restProps}>
-                    <style>{style}</style>
-                    {children}
-                </div>
+              <div id={id} className={cls} {...restProps}>
+                <style>{style}</style>
+                {children}
+              </div>
             );
 
             return tooltip ? (
-                <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
-                    {node}
-                </Tooltip>
+              <Tooltip overlayStyle={TooltipOverlayStyle} title={children}>
+                {node}
+              </Tooltip>
             ) : (
                 node
             );
         }
 
         const childNode = (
-            <span ref={this.handleNode}>
-                {targetCount > 0 && text.substring(0, targetCount)}
-                {targetCount > 0 && targetCount < text.length && '...'}
-            </span>
+          <span ref={this.handleNode}>
+            {targetCount > 0 && text.substring(0, targetCount)}
+            {targetCount > 0 && targetCount < text.length && '...'}
+          </span>
         );
 
         return (
-            <div {...restProps} ref={this.handleRoot} className={cls}>
-                <div ref={this.handleContent}>
-                    {tooltip ? (
-                        <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
-                            {childNode}
-                        </Tooltip>
+          <div {...restProps} ref={this.handleRoot} className={cls}>
+            <div ref={this.handleContent}>
+              {tooltip ? (
+                <Tooltip overlayStyle={TooltipOverlayStyle} title={text}>
+                  {childNode}
+                </Tooltip>
                     ) : (
                         childNode
                     )}
-                    <div className={styles.shadow} ref={this.handleShadowChildren}>
-                        {children}
-                    </div>
-                    <div className={styles.shadow} ref={this.handleShadow}>
-                        <span>{text}</span>
-                    </div>
-                </div>
+              <div className={styles.shadow} ref={this.handleShadowChildren}>
+                {children}
+              </div>
+              <div className={styles.shadow} ref={this.handleShadow}>
+                <span>{text}</span>
+              </div>
             </div>
+          </div>
         );
     }
 }

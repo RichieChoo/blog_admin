@@ -5,11 +5,11 @@ import { Switch, List } from 'antd';
 class NotificationView extends Component {
     getData = () => {
         const Action = (
-            <Switch
-                checkedChildren={formatMessage({ id: 'app.settings.open' })}
-                unCheckedChildren={formatMessage({ id: 'app.settings.close' })}
-                defaultChecked
-            />
+          <Switch
+            checkedChildren={formatMessage({ id: 'app.settings.open' })}
+            unCheckedChildren={formatMessage({ id: 'app.settings.close' })}
+            defaultChecked
+          />
         );
         return [
             {
@@ -41,17 +41,17 @@ class NotificationView extends Component {
 
     render() {
         return (
-            <Fragment>
-                <List
-                    itemLayout="horizontal"
-                    dataSource={this.getData()}
-                    renderItem={item => (
-                        <List.Item actions={item.actions}>
-                            <List.Item.Meta title={item.title} description={item.description} />
-                        </List.Item>
+          <Fragment>
+            <List
+              itemLayout="horizontal"
+              dataSource={this.getData()}
+              renderItem={item => (
+                <List.Item actions={item.actions}>
+                  <List.Item.Meta title={item.title} description={item.description} />
+                </List.Item>
                     )}
-                />
-            </Fragment>
+            />
+          </Fragment>
         );
     }
 }

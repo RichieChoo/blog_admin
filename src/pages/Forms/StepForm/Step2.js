@@ -41,29 +41,29 @@ class Step2 extends React.PureComponent {
             });
         };
         return (
-            <Form layout="horizontal" className={styles.stepForm}>
-                <Alert
-                    closable
-                    showIcon
-                    message="确认转账后，资金将直接打入对方账户，无法退回。"
-                    style={{ marginBottom: 24 }}
-                />
-                <Form.Item {...formItemLayout} className={styles.stepFormText} label="付款账户">
-                    {data.payAccount}
-                </Form.Item>
-                <Form.Item {...formItemLayout} className={styles.stepFormText} label="收款账户">
-                    {data.receiverAccount}
-                </Form.Item>
-                <Form.Item {...formItemLayout} className={styles.stepFormText} label="收款人姓名">
-                    {data.receiverName}
-                </Form.Item>
-                <Form.Item {...formItemLayout} className={styles.stepFormText} label="转账金额">
-                    <span className={styles.money}>{data.amount}</span>
-                    <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span>
-                </Form.Item>
-                <Divider style={{ margin: '24px 0' }} />
-                <Form.Item {...formItemLayout} label="支付密码" required={false}>
-                    {getFieldDecorator('password', {
+          <Form layout="horizontal" className={styles.stepForm}>
+            <Alert
+              closable
+              showIcon
+              message="确认转账后，资金将直接打入对方账户，无法退回。"
+              style={{ marginBottom: 24 }}
+            />
+            <Form.Item {...formItemLayout} className={styles.stepFormText} label="付款账户">
+              {data.payAccount}
+            </Form.Item>
+            <Form.Item {...formItemLayout} className={styles.stepFormText} label="收款账户">
+              {data.receiverAccount}
+            </Form.Item>
+            <Form.Item {...formItemLayout} className={styles.stepFormText} label="收款人姓名">
+              {data.receiverName}
+            </Form.Item>
+            <Form.Item {...formItemLayout} className={styles.stepFormText} label="转账金额">
+              <span className={styles.money}>{data.amount}</span>
+              <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span>
+            </Form.Item>
+            <Divider style={{ margin: '24px 0' }} />
+            <Form.Item {...formItemLayout} label="支付密码" required={false}>
+              {getFieldDecorator('password', {
                         initialValue: '123456',
                         rules: [
                             {
@@ -72,26 +72,26 @@ class Step2 extends React.PureComponent {
                             },
                         ],
                     })(<Input type="password" autoComplete="off" style={{ width: '80%' }} />)}
-                </Form.Item>
-                <Form.Item
-                    style={{ marginBottom: 8 }}
-                    wrapperCol={{
+            </Form.Item>
+            <Form.Item
+              style={{ marginBottom: 8 }}
+              wrapperCol={{
                         xs: { span: 24, offset: 0 },
                         sm: {
                             span: formItemLayout.wrapperCol.span,
                             offset: formItemLayout.labelCol.span,
                         },
                     }}
-                    label=""
-                >
-                    <Button type="primary" onClick={onValidateForm} loading={submitting}>
+              label=""
+            >
+              <Button type="primary" onClick={onValidateForm} loading={submitting}>
                         提交
-                    </Button>
-                    <Button onClick={onPrev} style={{ marginLeft: 8 }}>
+              </Button>
+              <Button onClick={onPrev} style={{ marginLeft: 8 }}>
                         上一步
-                    </Button>
-                </Form.Item>
-            </Form>
+              </Button>
+            </Form.Item>
+          </Form>
         );
     }
 }

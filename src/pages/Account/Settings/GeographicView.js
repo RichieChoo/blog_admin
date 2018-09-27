@@ -50,15 +50,15 @@ class GeographicView extends PureComponent {
     getOption = list => {
         if (!list || list.length < 1) {
             return (
-                <Option key={0} value={0}>
+              <Option key={0} value={0}>
                     没有找到选项
-                </Option>
+              </Option>
             );
         }
         return list.map(item => (
-            <Option key={item.id} value={item.id}>
-                {item.name}
-            </Option>
+          <Option key={item.id} value={item.id}>
+            {item.name}
+          </Option>
         ));
     };
 
@@ -101,26 +101,26 @@ class GeographicView extends PureComponent {
         const { province, city } = this.conversionObject();
         const { isLoading } = this.props;
         return (
-            <Spin spinning={isLoading} wrapperClassName={styles.row}>
-                <Select
-                    className={styles.item}
-                    value={province}
-                    labelInValue
-                    showSearch
-                    onSelect={this.selectProvinceItem}
-                >
-                    {this.getProvinceOption()}
-                </Select>
-                <Select
-                    className={styles.item}
-                    value={city}
-                    labelInValue
-                    showSearch
-                    onSelect={this.selectCityItem}
-                >
-                    {this.getCityOption()}
-                </Select>
-            </Spin>
+          <Spin spinning={isLoading} wrapperClassName={styles.row}>
+            <Select
+              className={styles.item}
+              value={province}
+              labelInValue
+              showSearch
+              onSelect={this.selectProvinceItem}
+            >
+              {this.getProvinceOption()}
+            </Select>
+            <Select
+              className={styles.item}
+              value={city}
+              labelInValue
+              showSearch
+              onSelect={this.selectCityItem}
+            >
+              {this.getCityOption()}
+            </Select>
+          </Spin>
         );
     }
 }

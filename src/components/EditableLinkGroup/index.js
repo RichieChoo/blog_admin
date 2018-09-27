@@ -21,8 +21,8 @@ class EditableLinkGroup extends PureComponent {
     render() {
         const { links, linkElement, onAdd } = this.props;
         return (
-            <div className={styles.linkGroup}>
-                {links.map(link =>
+          <div className={styles.linkGroup}>
+            {links.map(link =>
                     createElement(
                         linkElement,
                         {
@@ -33,12 +33,12 @@ class EditableLinkGroup extends PureComponent {
                         link.title
                     )
                 )}
-                {
-                    <Button size="small" type="primary" ghost onClick={onAdd} icon="plus">
+            {
+              <Button size="small" type="primary" ghost onClick={onAdd} icon="plus">
                         添加
-                    </Button>
+              </Button>
                 }
-            </div>
+          </div>
         );
     }
 }

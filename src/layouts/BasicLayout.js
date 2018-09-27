@@ -232,53 +232,53 @@ class BasicLayout extends React.PureComponent {
         const menuData = this.getMenuData();
         const routerConfig = this.matchParamsPath(pathname);
         const layout = (
-            <Layout>
-                {isTop && !isMobile ? null : (
-                    <SiderMenu
-                        logo={logo}
-                        Authorized={Authorized}
-                        theme={navTheme}
-                        onCollapse={this.handleMenuCollapse}
-                        menuData={menuData}
-                        isMobile={isMobile}
-                        {...this.props}
-                    />
+          <Layout>
+            {isTop && !isMobile ? null : (
+              <SiderMenu
+                logo={logo}
+                Authorized={Authorized}
+                theme={navTheme}
+                onCollapse={this.handleMenuCollapse}
+                menuData={menuData}
+                isMobile={isMobile}
+                {...this.props}
+              />
                 )}
-                <Layout
-                    style={{
+            <Layout
+              style={{
                         ...this.getLayoutStyle(),
                         minHeight: '100vh',
                     }}
-                >
-                    <Header
-                        menuData={menuData}
-                        handleMenuCollapse={this.handleMenuCollapse}
-                        logo={logo}
-                        isMobile={isMobile}
-                        {...this.props}
-                    />
-                    <Content style={this.getContentStyle()}>
-                        <Authorized authority={routerConfig.authority} noMatch={<Exception403 />}>
-                            {children}
-                        </Authorized>
-                    </Content>
-                    <Footer />
-                </Layout>
+            >
+              <Header
+                menuData={menuData}
+                handleMenuCollapse={this.handleMenuCollapse}
+                logo={logo}
+                isMobile={isMobile}
+                {...this.props}
+              />
+              <Content style={this.getContentStyle()}>
+                <Authorized authority={routerConfig.authority} noMatch={<Exception403 />}>
+                  {children}
+                </Authorized>
+              </Content>
+              <Footer />
             </Layout>
+          </Layout>
         );
         return (
-            <React.Fragment>
-                <DocumentTitle title={this.getPageTitle(pathname)}>
-                    <ContainerQuery query={query}>
-                        {params => (
-                            <Context.Provider value={this.getContext()}>
-                                <div className={classNames(params)}>{layout}</div>
-                            </Context.Provider>
+          <React.Fragment>
+            <DocumentTitle title={this.getPageTitle(pathname)}>
+              <ContainerQuery query={query}>
+                {params => (
+                  <Context.Provider value={this.getContext()}>
+                    <div className={classNames(params)}>{layout}</div>
+                  </Context.Provider>
                         )}
-                    </ContainerQuery>
-                </DocumentTitle>
-                {this.renderSettingDrawer()}
-            </React.Fragment>
+              </ContainerQuery>
+            </DocumentTitle>
+            {this.renderSettingDrawer()}
+          </React.Fragment>
         );
     }
 }

@@ -57,12 +57,12 @@ export default class BreadcrumbView extends PureComponent {
     conversionFromProps = () => {
         const { breadcrumbList, breadcrumbSeparator, itemRender, linkElement = 'a' } = this.props;
         return (
-            <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
-                {breadcrumbList.map(item => {
+          <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
+            {breadcrumbList.map(item => {
                     const title = itemRender ? itemRender(item) : item.title;
                     return (
-                        <Breadcrumb.Item key={item.title}>
-                            {item.href
+                      <Breadcrumb.Item key={item.title}>
+                        {item.href
                                 ? createElement(
                                       linkElement,
                                       {
@@ -71,10 +71,10 @@ export default class BreadcrumbView extends PureComponent {
                                       title
                                   )
                                 : title}
-                        </Breadcrumb.Item>
+                      </Breadcrumb.Item>
                     );
                 })}
-            </Breadcrumb>
+          </Breadcrumb>
         );
     };
 
@@ -91,31 +91,31 @@ export default class BreadcrumbView extends PureComponent {
             const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
             const name = itemRender ? itemRender(currentBreadcrumb) : currentBreadcrumb.name;
             return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
-                <Breadcrumb.Item key={url}>
-                    {createElement(
+              <Breadcrumb.Item key={url}>
+                {createElement(
                         isLinkable ? linkElement : 'span',
                         { [linkElement === 'a' ? 'href' : 'to']: url },
                         name
                     )}
-                </Breadcrumb.Item>
+              </Breadcrumb.Item>
             ) : null;
         });
         // Add home breadcrumbs to your head
         extraBreadcrumbItems.unshift(
-            <Breadcrumb.Item key="home">
-                {createElement(
+          <Breadcrumb.Item key="home">
+            {createElement(
                     linkElement,
                     {
                         [linkElement === 'a' ? 'href' : 'to']: '/',
                     },
                     home || 'Home'
                 )}
-            </Breadcrumb.Item>
+          </Breadcrumb.Item>
         );
         return (
-            <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
-                {extraBreadcrumbItems}
-            </Breadcrumb>
+          <Breadcrumb className={styles.breadcrumb} separator={breadcrumbSeparator}>
+            {extraBreadcrumbItems}
+          </Breadcrumb>
         );
     };
 
@@ -133,13 +133,13 @@ export default class BreadcrumbView extends PureComponent {
         // If pass routes and params attributes
         if (routes && params) {
             return (
-                <Breadcrumb
-                    className={styles.breadcrumb}
-                    routes={routes.filter(route => route.breadcrumbName)}
-                    params={params}
-                    itemRender={this.itemRender}
-                    separator={breadcrumbSeparator}
-                />
+              <Breadcrumb
+                className={styles.breadcrumb}
+                routes={routes.filter(route => route.breadcrumbName)}
+                params={params}
+                itemRender={this.itemRender}
+                separator={breadcrumbSeparator}
+              />
             );
         }
         // 根据 location 生成 面包屑
@@ -156,7 +156,7 @@ export default class BreadcrumbView extends PureComponent {
         const { linkElement = 'a' } = this.props;
         const last = routes.indexOf(route) === routes.length - 1;
         return last || !route.component ? (
-            <span>{route.breadcrumbName}</span>
+          <span>{route.breadcrumbName}</span>
         ) : (
             createElement(
                 linkElement,

@@ -7,9 +7,9 @@ import styles from './index.less';
 const { CheckableTag } = Tag;
 
 const TagSelectOption = ({ children, checked, onChange, value }) => (
-    <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
-        {children}
-    </CheckableTag>
+  <CheckableTag checked={checked} key={value} onChange={state => onChange(value, state)}>
+    {children}
+  </CheckableTag>
 );
 
 TagSelectOption.isTagSelectOption = true;
@@ -97,17 +97,17 @@ class TagSelect extends Component {
             [styles.expanded]: expand,
         });
         return (
-            <div className={cls} style={style}>
-                {hideCheckAll ? null : (
-                    <CheckableTag
-                        checked={checkedAll}
-                        key="tag-select-__all__"
-                        onChange={this.onSelectAll}
-                    >
+          <div className={cls} style={style}>
+            {hideCheckAll ? null : (
+              <CheckableTag
+                checked={checkedAll}
+                key="tag-select-__all__"
+                onChange={this.onSelectAll}
+              >
                         全部
-                    </CheckableTag>
+              </CheckableTag>
                 )}
-                {value &&
+            {value &&
                     React.Children.map(children, child => {
                         if (this.isTagSelectOption(child)) {
                             return React.cloneElement(child, {
@@ -119,12 +119,12 @@ class TagSelect extends Component {
                         }
                         return child;
                     })}
-                {expandable && (
-                    <a className={styles.trigger} onClick={this.handleExpand}>
-                        {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
-                    </a>
+            {expandable && (
+            <a className={styles.trigger} onClick={this.handleExpand}>
+              {expand ? '收起' : '展开'} <Icon type={expand ? 'up' : 'down'} />
+            </a>
                 )}
-            </div>
+          </div>
         );
     }
 }
