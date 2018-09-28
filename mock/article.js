@@ -1,5 +1,11 @@
 const arr = [];
-for (let i = 0; i < 46; i += 1) {
+const length = 46;
+const data={
+    pageNum: 1,
+    pageSize: 10,
+    total:length
+};
+for (let i = 0; i < length; i += 1) {
     const obj = {};
     obj.id = i + 1;
     obj.name = `Mock文章${i}${1}`;
@@ -12,13 +18,15 @@ for (let i = 0; i < 46; i += 1) {
 }
 
 function get(req, res) {
+    data.list = arr;
+
     res.send({
         success: true,
         message: 'MockData--获取列表成功',
-        data: arr,
+        data
     });
 }
 
 export default {
-    'GET /api/article/get': get,
+    'POST /api/article/get': get,
 };
