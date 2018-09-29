@@ -26,8 +26,8 @@ export default {
                 const result = {
                     list: (response.data && response.data.list) || [],
                     pagination: {
-                        current: payload.pageNum,
-                        pageSize: payload.pageSize,
+                        current: payload.params.pageNum,
+                        pageSize: payload.params.pageSize,
                         total: (response.data && response.data.total) || 0,
                     },
                 };

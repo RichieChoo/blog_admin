@@ -1,7 +1,6 @@
 import request from '@/utils/request';
 
 export async function getItem(params,namespace) {
-    console.warn("namespace", namespace);
     return request(`/api/${namespace}/get`,{
         method:'POST',
         body:params,

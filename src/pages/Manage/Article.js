@@ -14,8 +14,8 @@ const simpleConditions = [
         label: '文章ID',
         key: 'id',
     }, {
-        label: '文章名称',
-        key: 'name',
+        label: '文章标题',
+        key: 'title',
     },
 ];
 
@@ -75,16 +75,16 @@ class AppComponent extends PureComponent {
         dispatch({
             type: `${namespace}/fetch`,
             payload: {
-                ...params,
+                params,
                 namespace,
             },
         });
-        dispatch({
-            type:'/api/map/get',
-            payload:{
-                name:'ARTICLE_TYPE'
-            }
-        })
+        // dispatch({
+        //     type:'/api/map/get',
+        //     payload:{
+        //         name:'ARTICLE_TYPE'
+        //     }
+        // })
     };
 
     articleTypeRender = (val)=>{
@@ -92,20 +92,17 @@ class AppComponent extends PureComponent {
             const { articleType: { map } } = this.props[namespace];
             return map[val] || val;
         }
-    }
+    };
+
+
     handleStandardTableChange = (pagination, /* filtersArg, sorter */) => {
-        const { dispatch } = this.props;
         const { formValues } = this.state;
 
         const params = {};
         params.pageNum = pagination.current;
         params.pageSize = pagination.pageSize;
         params.query = formValues;
-
-        dispatch({
-            type: `${namespace}/fetch`,
-            payload: params,
-        });
+        this.fetchList(params);
     }
 
     handleSelectRows = (rows) => {
@@ -154,8 +151,8 @@ class AppComponent extends PureComponent {
             width: 100,
         },{
             title: '文章标题',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'title',
+            key: 'title',
             width: 200,
         },
         {
@@ -172,16 +169,29 @@ class AppComponent extends PureComponent {
             render: this.articleTypeRender,
         },
         {
-            title: '浏览量',
+            title: '文章介绍',
+            dataIndex: 'introduction',
             width: 200,
-            dataIndex: 'pv',
-            key: 'pv',
+            key: 'introduction',
+        },
+        {
+            title: '浏览量',
+            dataIndex: 'browser',
+            width: 200,
+            key: 'browser',
+        },
+
+        {
+            title: '作者',
+            width: 200,
+            dataIndex: 'author',
+            key: 'author',
         },
         {
             title: '创建时间',
-            width: 200,
-            dataIndex: 'createTime',
-            key: 'createTime',
+            width: 300,
+            dataIndex: 'createdAt',
+            key: 'createdAt',
         },{
             title: '标签',
             width: 200,
@@ -255,8 +265,8 @@ class AppComponent extends PureComponent {
                         columns={this.columns}
                         onSelectRow={this.handleSelectRows}
                         onChange={this.handleStandardTableChange}
-                        rowKey="name"
-                        scroll={{ x: 1600 }}
+                        rowKey="id"
+                        scroll={{ x: 2100 }}
                     />
                 </div>
             </Card>
