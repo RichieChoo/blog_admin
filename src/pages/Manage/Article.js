@@ -1,7 +1,7 @@
 import React, {PureComponent, Fragment} from 'react';
 import {connect} from 'dva';
-import { Card, Form, Upload, Button, message, Modal } from 'antd';
-import StandardTable from './../../components/StandardTable';
+import { Card, Form, Table,Upload, Button, message, Modal } from 'antd';
+import StandardTable from './../../components/StandardTable';//当列固定时，对应的已做修改。
 import BasicSearch from './../../components/ARComponents/BasicSearch'
 import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import { boolRender, btnRenderFactory, btnRender, enableRender } from './../../utils/render';
@@ -149,6 +149,7 @@ class AppComponent extends PureComponent {
         {
             title: '文章Id',
             dataIndex: 'id',
+            fixed:'left',
             key: 'id',
             width: 100,
         },{
@@ -254,8 +255,7 @@ class AppComponent extends PureComponent {
                         columns={this.columns}
                         onSelectRow={this.handleSelectRows}
                         onChange={this.handleStandardTableChange}
-                        rowKey="id"
-                        columnWidth = {1200}
+                        rowKey="name"
                         scroll={{ x: 1600 }}
                     />
                 </div>
