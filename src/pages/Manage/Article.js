@@ -5,10 +5,10 @@ import StandardTable from './../../components/StandardTable';//当列固定时�
 import BasicSearch from './../../components/ARComponents/BasicSearch'
 import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import { boolRender, btnRenderFactory, btnRender, enableRender } from './../../utils/render';
-import styles from './Article.less';
+import styles from '../List.less';
 
 const namespace = 'article';
-
+const single=true;
 const simpleConditions = [
     {
         label: '文章ID',
@@ -103,7 +103,7 @@ class AppComponent extends PureComponent {
         params.pageSize = pagination.pageSize;
         params.query = formValues;
         this.fetchList(params);
-    }
+    };
 
     handleSelectRows = (rows) => {
         this.setState({
@@ -130,11 +130,11 @@ class AppComponent extends PureComponent {
             }
         }
         this.fetchList(params)
-    }
+    };
 
     goFormFactory = (type, noRecord) => (record) => {
         this.props.dispatch({
-            type: `${namespace}/goFormPage`,
+            type: `${namespace}/goForm`,
             payload: {
                 type,
                 record: noRecord ? '' : record,
@@ -142,6 +142,49 @@ class AppComponent extends PureComponent {
         });
     };
 
+    //删除单个和多个用同一个接口，且是软删除
+    deleteItem = (record,single) => {
+        const ids =[];
+        if(single){
+            ids.push(record.id)
+        }else {
+            this.state.selectedRows.forEach((v)=>{
+                ids.push(v.id)
+            })
+        }
+        const length = ids.length === 0 ? '' : `${ids.length}篇`;
+        const infoText = single?`确认删除${record.title}的文章吗？`:`确认删除选中的${length}文章吗？`;
+        const { dispatch } = this.props;
+
+
+        Modal.confirm({
+            title: '操作提醒',
+            content: infoText,
+            okText: '删除',
+            okType: 'danger',
+            cancelText: '取消',
+            onCancel: () => {},
+            onOk: () => {
+                dispatch({
+                    type: `${namespace}/deleteItem`,
+                    payload: {
+                        params:ids,
+                        namespace
+                    },
+                    callback: () => {
+                        this.setState({
+                            selectedRows: [],
+                        });
+                        this.fetchList({
+                            pageNum: 1,
+                            pageSize:10,
+                            query:{}
+                        });
+                    },
+                });
+            },
+        });
+    };
     columns = [
         {
             title: '文章Id',
@@ -215,7 +258,7 @@ class AppComponent extends PureComponent {
                 },
                 {
                     label: '删除',
-                    callback: this.deleteItem,
+                    callback: (record,single)=>this.deleteItem(record,single),
                     key: 'del',
                 },
             ], this),
@@ -234,8 +277,9 @@ class AppComponent extends PureComponent {
         {
             icon: 'delete',
             key: 'del',
+            type: 'danger',
             label: '删除',
-            callback: () => this.deleteItemSelected(),
+            callback:()=>this.deleteItem(),
         },
     ];
 

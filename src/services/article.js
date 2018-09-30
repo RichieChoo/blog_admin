@@ -8,7 +8,7 @@ export async function getItem(params,namespace) {
 }
 
 export async function putItem(params,namespace) {
-    return request(`/api/${namespace}/put`, {
+    return request(`/api/${namespace}/edit/${params.id}`, {
         method: 'PUT',
         body: {
             ...params,
@@ -25,8 +25,13 @@ export async function addItem(params,namespace) {
     });
 }
 
+//删除单个和多个用同一个接口，且是软删除
 export async function deleteItem(params,namespace) {
-    return request(`/api/${namespace}/delete/${params.id}`, {
-        method: 'DELETE',
+    return request(`/api/${namespace}/delete`, {
+        method: 'POST',
+        body: {
+            ids:params,
+        },
     });
 }
+
