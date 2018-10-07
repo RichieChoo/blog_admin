@@ -107,7 +107,7 @@ export default function request(
 
 
     //缓存(注释掉)
-    const expirys = options.expirys || 60;
+    // const expirys = options.expirys || 60;
     // options.expirys !== false, return the cache,
     if (options.expirys !== false) {
         const cached = sessionStorage.getItem(hashcode);
