@@ -6,6 +6,8 @@ import BasicSearch from './../../components/ARComponents/BasicSearch'
 import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import { boolRender, btnRenderFactory, btnRender, enableRender } from './../../utils/render';
 import styles from '../List.less';
+import { filterFalse } from '../../utils/utils';
+
 
 const namespace = 'article';
 const single=true;
@@ -119,16 +121,7 @@ class AppComponent extends PureComponent {
         params.pageNum = 1;
         params.pageSize = 10;
         params.query = fieldsValue;
-        for (const i in params.query) {
-            if (params.query.hasOwnProperty(i)) { // eslint-disable-line
-                const element = params.query[i];
-                if (!element) {
-                    if (element !== 0) {
-                        delete params.query[i];
-                    }
-                }
-            }
-        }
+        filterFalse(params.query);
         this.fetchList(params)
     };
 
@@ -137,7 +130,7 @@ class AppComponent extends PureComponent {
             type: `${namespace}/goForm`,
             payload: {
                 type,
-                record: noRecord ? '' : record,
+                record: noRecord ? "" : record,
             },
         });
     };

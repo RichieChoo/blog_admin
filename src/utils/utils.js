@@ -178,6 +178,17 @@ export function formatWan(val) {
     return result;
 }
 
-export function isAntdPro() {
-    return window.location.hostname === 'preview.pro.ant.design';
+
+
+export  function filterFalse(obj) {
+    for (const i in obj) {
+        if (obj.hasOwnProperty(i)) { // eslint-disable-line
+            const element = obj[i];
+            if (!element) {
+                if (element !== 0) {
+                    delete obj[i];
+                }
+            }
+        }
+    }
 }

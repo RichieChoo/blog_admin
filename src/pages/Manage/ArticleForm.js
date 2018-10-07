@@ -6,6 +6,7 @@ import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import FooterToolbar from './../../components/FooterToolbar';
 import styles from '../Form.less';
 import { renderFormInput } from '../../components/_utils/input';
+import { filterFalse } from '../../utils/utils';
 
 const formLayout = {
     labelCol: { span: 7 },
@@ -27,8 +28,19 @@ const getInputs = (editFlag) => [
         disabled: editFlag,
     },
     {
+        key:'content',
+        label:'内容',
+        required: true,
+    },
+    {
+        key: 'type',
+        label: '类型',
+        required: true,
+    },
+    {
         key: 'author',
         label: '作者',
+        required: true,
         disabled: editFlag,
     },
     {
@@ -38,21 +50,12 @@ const getInputs = (editFlag) => [
         disabled: editFlag,
     },
     {
-        key: 'type',
-        label: '类型',
-        required: true,
-    },
-    {
         key: 'introduction',
         label: '介绍',
     },
     {
         key: 'tag',
         label: '标签',
-    },
-    {
-        key:'content',
-        label:'内容',
     }
 ];
 
@@ -94,10 +97,10 @@ export default class AgvForm extends PureComponent {
             if (!error) {
                 // 处理参数
                 // submit the values
-                console.warn("me.state.record.id", me.state.record.id);
                 let id = me.state.record && me.state.record.id?me.state.record.id:false;
                 let type = id?namespace +"/" +"edit":namespace +"/" +"add";
                 params.id =id;
+                filterFalse(params);
                 dispatch({
                     type,
                     payload: {

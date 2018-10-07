@@ -2,7 +2,6 @@ import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
-import { isAntdPro } from './utils';
 
 const codeMessage = {
     200: '服务器成功返回请求的数据。',
@@ -24,6 +23,7 @@ const codeMessage = {
 
 const checkStatus = response => {
     if (response.status >= 200 && response.status < 300) {
+        console.warn('fetch')
         return response;
     }
     const errortext = codeMessage[response.status] || response.statusText;
@@ -66,7 +66,7 @@ const cachedSave = (response, hashcode) => {
 export default function request(
     url,
     options = {
-        expirys: isAntdPro(),
+        expirys: false,
     }
 ) {
     /**
@@ -104,6 +104,9 @@ export default function request(
         }
     }
 
+
+
+    //缓存(注释掉)
     const expirys = options.expirys || 60;
     // options.expirys !== false, return the cache,
     if (options.expirys !== false) {
@@ -132,25 +135,25 @@ export default function request(
         })
         .catch(e => {
             const status = e.name;
-            if (status === 401) {
-                // @HACK
-                /* eslint-disable no-underscore-dangle */
-                window.g_app._store.dispatch({
-                    type: 'login/logout',
-                });
-                return;
-            }
-            // environment should not be used
-            if (status === 403) {
-                router.push('/exception/403');
-                return;
-            }
-            if (status <= 504 && status >= 500) {
-                router.push('/exception/500');
-                return;
-            }
-            if (status >= 404 && status < 422) {
-                router.push('/exception/404');
-            }
+            // if (status === 401) {
+            //     // @HACK
+            //     /* eslint-disable no-underscore-dangle */
+            //     window.g_app._store.dispatch({
+            //         type: 'login/logout',
+            //     });
+            //     return;
+            // }
+            // // environment should not be used
+            // if (status === 403) {
+            //     router.push('/exception/403');
+            //     return;
+            // }
+            // if (status <= 504 && status >= 500) {
+            //     router.push('/exception/500');
+            //     return;
+            // }
+            // if (status >= 404 && status < 422) {
+            //     router.push('/exception/404');
+            // }
         });
 }
