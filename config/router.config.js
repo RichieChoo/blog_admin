@@ -29,6 +29,12 @@ export default [
                         name: 'article',
                         component: './Manage/Article',
                     },
+                    {
+                        path: '/manage/article/form',
+                        name: 'articleForm',
+                        hideInMenu: true,
+                        component: './Manage/ArticleForm',
+                    }
                 ],
             },
             {
@@ -62,7 +68,37 @@ export default [
                 ],
             },
             {
-                component: '404',
+                name: 'exception',
+                icon: 'warning',
+                path: '/exception',
+                hideInMenu: true,
+                routes: [
+                    // exception
+                    {
+                        path: '/exception/403',
+                        name: 'not-permission',
+                        hideInMenu: true,
+                        component: './Exception/403',
+                    },
+                    {
+                        path: '/exception/404',
+                        name: 'not-find',
+                        hideInMenu: true,
+                        component: './Exception/404',
+                    },
+                    {
+                        path: '/exception/500',
+                        name: 'server-error',
+                        hideInMenu: true,
+                        component: './Exception/500',
+                    },
+                    {
+                        path: '/exception/trigger',
+                        name: 'trigger',
+                        hideInMenu: true,
+                        component: './Exception/TriggerException',
+                    },
+                ],
             },
         ],
     },

@@ -4,6 +4,7 @@ import pageRoutes from './router.config';
 import webpackplugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 
+const devHost = "http://localhost:3000/api";
 export default {
     // add for transfer to umi
     plugins: [
@@ -50,6 +51,13 @@ export default {
     // https://ant.design/docs/react/customize-theme-cn
     theme: {
         'primary-color': defaultSettings.primaryColor,
+    },
+    proxy: {
+        '/api': {
+            target: devHost,
+            changeOrigin: true,
+            pathRewrite: { '^/api': '' },
+        },
     },
     externals: {
         '@antv/data-set': 'DataSet',

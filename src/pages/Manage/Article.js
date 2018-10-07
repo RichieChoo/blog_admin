@@ -1,21 +1,21 @@
 import React, {PureComponent, Fragment} from 'react';
 import {connect} from 'dva';
-import { Card, Form, Upload, Button, message, Modal } from 'antd';
-import StandardTable from './../../components/StandardTable';
+import { Card, Form, Table,Upload, Button, message, Modal } from 'antd';
+import StandardTable from './../../components/StandardTable';//当列固定时，对应的已做修改。
 import BasicSearch from './../../components/ARComponents/BasicSearch'
 import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import { boolRender, btnRenderFactory, btnRender, enableRender } from './../../utils/render';
-import styles from './Article.less';
+import styles from '../List.less';
 
 const namespace = 'article';
-
+const single=true;
 const simpleConditions = [
     {
         label: '文章ID',
         key: 'id',
     }, {
-        label: '文章名称',
-        key: 'name',
+        label: '文章标题',
+        key: 'title',
     },
 ];
 
@@ -75,16 +75,16 @@ class AppComponent extends PureComponent {
         dispatch({
             type: `${namespace}/fetch`,
             payload: {
-                ...params,
+                params,
                 namespace,
             },
         });
-        dispatch({
-            type:'/api/map/get',
-            payload:{
-                name:'ARTICLE_TYPE'
-            }
-        })
+        // dispatch({
+        //     type:'/api/map/get',
+        //     payload:{
+        //         name:'ARTICLE_TYPE'
+        //     }
+        // })
     };
 
     articleTypeRender = (val)=>{
@@ -92,21 +92,18 @@ class AppComponent extends PureComponent {
             const { articleType: { map } } = this.props[namespace];
             return map[val] || val;
         }
-    }
+    };
+
+
     handleStandardTableChange = (pagination, /* filtersArg, sorter */) => {
-        const { dispatch } = this.props;
         const { formValues } = this.state;
 
         const params = {};
         params.pageNum = pagination.current;
         params.pageSize = pagination.pageSize;
         params.query = formValues;
-
-        dispatch({
-            type: `${namespace}/fetch`,
-            payload: params,
-        });
-    }
+        this.fetchList(params);
+    };
 
     handleSelectRows = (rows) => {
         this.setState({
@@ -133,11 +130,11 @@ class AppComponent extends PureComponent {
             }
         }
         this.fetchList(params)
-    }
+    };
 
     goFormFactory = (type, noRecord) => (record) => {
         this.props.dispatch({
-            type: `${namespace}/goFormPage`,
+            type: `${namespace}/goForm`,
             payload: {
                 type,
                 record: noRecord ? '' : record,
@@ -145,16 +142,60 @@ class AppComponent extends PureComponent {
         });
     };
 
+    //删除单个和多个用同一个接口，且是软删除
+    deleteItem = (record,single) => {
+        const ids =[];
+        if(single){
+            ids.push(record.id)
+        }else {
+            this.state.selectedRows.forEach((v)=>{
+                ids.push(v.id)
+            })
+        }
+        const length = ids.length === 0 ? '' : `${ids.length}篇`;
+        const infoText = single?`确认删除${record.title}的文章吗？`:`确认删除选中的${length}文章吗？`;
+        const { dispatch } = this.props;
+
+
+        Modal.confirm({
+            title: '操作提醒',
+            content: infoText,
+            okText: '删除',
+            okType: 'danger',
+            cancelText: '取消',
+            onCancel: () => {},
+            onOk: () => {
+                dispatch({
+                    type: `${namespace}/deleteItem`,
+                    payload: {
+                        params:ids,
+                        namespace
+                    },
+                    callback: () => {
+                        this.setState({
+                            selectedRows: [],
+                        });
+                        this.fetchList({
+                            pageNum: 1,
+                            pageSize:10,
+                            query:{}
+                        });
+                    },
+                });
+            },
+        });
+    };
     columns = [
         {
             title: '文章Id',
             dataIndex: 'id',
+            fixed:'left',
             key: 'id',
             width: 100,
         },{
             title: '文章标题',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'title',
+            key: 'title',
             width: 200,
         },
         {
@@ -171,16 +212,29 @@ class AppComponent extends PureComponent {
             render: this.articleTypeRender,
         },
         {
-            title: '浏览量',
+            title: '文章介绍',
+            dataIndex: 'introduction',
             width: 200,
-            dataIndex: 'pv',
-            key: 'pv',
+            key: 'introduction',
+        },
+        {
+            title: '浏览量',
+            dataIndex: 'browser',
+            width: 200,
+            key: 'browser',
+        },
+
+        {
+            title: '作者',
+            width: 200,
+            dataIndex: 'author',
+            key: 'author',
         },
         {
             title: '创建时间',
-            width: 200,
-            dataIndex: 'createTime',
-            key: 'createTime',
+            width: 300,
+            dataIndex: 'createdAt',
+            key: 'createdAt',
         },{
             title: '标签',
             width: 200,
@@ -204,7 +258,7 @@ class AppComponent extends PureComponent {
                 },
                 {
                     label: '删除',
-                    callback: this.deleteItem,
+                    callback: (record,single)=>this.deleteItem(record,single),
                     key: 'del',
                 },
             ], this),
@@ -223,8 +277,9 @@ class AppComponent extends PureComponent {
         {
             icon: 'delete',
             key: 'del',
+            type: 'danger',
             label: '删除',
-            callback: () => this.deleteItemSelected(),
+            callback:()=>this.deleteItem(),
         },
     ];
 
@@ -255,8 +310,7 @@ class AppComponent extends PureComponent {
                         onSelectRow={this.handleSelectRows}
                         onChange={this.handleStandardTableChange}
                         rowKey="id"
-                        columnWidth = {1200}
-                        scroll={{ x: 1600 }}
+                        scroll={{ x: 2100 }}
                     />
                 </div>
             </Card>
