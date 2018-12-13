@@ -4,9 +4,8 @@ import pageRoutes from './router.config';
 import webpackplugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 
-const devHost = "http://localhost:3000/api";
+const devHost = 'http://localhost:3000/api';
 export default {
-    // add for transfer to umi
     plugins: [
         [
             'umi-plugin-react',
