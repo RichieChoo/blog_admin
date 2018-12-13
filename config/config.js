@@ -56,7 +56,7 @@ export default {
         '/api': {
             target: devHost,
             changeOrigin: true,
-            pathRewrite: { '^/api': '' },
+            pathRewrite: { '^/api': 'api' },
         },
     },
     externals: {
