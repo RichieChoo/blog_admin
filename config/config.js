@@ -4,7 +4,7 @@ import pageRoutes from './router.config';
 import webpackplugin from './plugin.config';
 import defaultSettings from '../src/defaultSettings';
 
-const devHost = "http://47.75.247.91:3000";
+const devHost = "http://127.0.0.1:3000";
 export default {
     plugins: [
         [
