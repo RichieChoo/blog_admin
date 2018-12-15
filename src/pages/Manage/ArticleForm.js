@@ -15,8 +15,7 @@ const formLayout = {
 const namespace = 'article';
 const typeDescMap = {
     add: '新增',
-    edit: '修改',
-    view: '查看',
+    edit: '修改'
 };
 const getDesc = type => `${typeDescMap[type] || ''}文章`;
 
@@ -158,7 +157,7 @@ export default class AgvForm extends PureComponent {
         const { form: { getFieldDecorator }, addSubmitting, editSubmitting, pageType } = this.props;
         const rows = [];
         const fieldLabels = {};
-        getInputs(pageType === 'edit' || pageType === 'view').forEach((input) => {
+        getInputs(pageType === 'edit').forEach((input) => {
             fieldLabels[input.key] = input.label;
             if (rows.length === 0 || rows[rows.length - 1].length === 2) {
                 rows.push([input]);

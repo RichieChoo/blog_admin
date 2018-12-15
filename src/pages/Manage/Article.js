@@ -240,11 +240,6 @@ class AppComponent extends PureComponent {
             width: 200,
             render: btnRenderFactory([
                 {
-                    label: '查看',
-                    callback: this.goFormFactory('view'),
-                    key: 'view',
-                },
-                {
                     label: '编辑',
                     callback: this.goFormFactory('edit'),
                     key: 'edit',

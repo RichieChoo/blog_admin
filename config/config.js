@@ -54,8 +54,7 @@ export default {
     proxy: {
         '/api': {
             target: devHost,
-            changeOrigin: true,
-            pathRewrite: { '^/api': 'api' },
+            changeOrigin: true
         },
     },
     externals: {
