@@ -1,16 +1,17 @@
-import React, { PureComponent } from 'react';
-import { Card, Button, Form, Icon, Col, Row, Popover } from 'antd';
-import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import React, {PureComponent} from 'react';
+import {Card, Button, Form, Icon, Col, Row, Popover} from 'antd';
+import {connect} from 'dva';
+import {routerRedux} from 'dva/router';
 import PageHeaderLayout from './../../layouts/PageHeaderLayout';
 import FooterToolbar from './../../components/FooterToolbar';
 import styles from '../Form.less';
-import { renderFormInput } from '../../components/_utils/input';
-import { filterFalse } from '../../utils/utils';
+import {renderFormInput} from '../../components/_utils/input';
+import {filterFalse} from '../../utils/utils';
+import WangEditor from "../../components/ARComponents/WangEidtor";
 
 const formLayout = {
-    labelCol: { span: 7 },
-    wrapperCol: { span: 17 },
+    labelCol: {span: 7},
+    wrapperCol: {span: 17},
 };
 const namespace = 'article';
 const typeDescMap = {
@@ -27,8 +28,8 @@ const getInputs = (editFlag) => [
         disabled: editFlag,
     },
     {
-        key:'content',
-        label:'内容',
+        key: 'content',
+        label: '内容',
         required: true,
     },
     {
@@ -58,7 +59,7 @@ const getInputs = (editFlag) => [
     }
 ];
 
-@connect(({ global, loading, article }) => ({
+@connect(({global, loading, article}) => ({
     record: article.record,
     pageType: article.pageType,
     collapsed: global.collapsed,
@@ -66,29 +67,35 @@ const getInputs = (editFlag) => [
     editSubmitting: loading.effects['article/edit'],
 }))
 @Form.create()
-export default class AgvForm extends PureComponent {
+export default class ArticleForm extends PureComponent {
     constructor(props) {
         super(props);
+        const {record={}} = props;
         this.state = {
-            record: props.record,
+            record: record,
+            content:record.content,
             width: '100%',
         };
     }
+
     componentDidMount() {
         window.addEventListener('resize', this.resizeFooterToolbar);
     }
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.resizeFooterToolbar);
     }
+
     resizeFooterToolbar = () => {
         const sider = document.querySelectorAll('.ant-layout-sider')[0];
-        const width = !!sider?`calc(100% - ${sider.style.width})`:"100%"
+        const width = !!sider ? `calc(100% - ${sider.style.width})` : "100%";
         if (this.state.width !== width) {
-            this.setState({ width });
+            this.setState({width});
         }
     };
     validate = () => {
-        const { dispatch, form: { validateFieldsAndScroll } } = this.props;
+        const {dispatch, form: {validateFieldsAndScroll}} = this.props;
+        const {content} = this.state;
         const me = this;
         validateFieldsAndScroll((error, values) => {
             const params = values;
@@ -96,9 +103,10 @@ export default class AgvForm extends PureComponent {
             if (!error) {
                 // 处理参数
                 // submit the values
-                let id = me.state.record && me.state.record.id?me.state.record.id:false;
-                let type = id?namespace +"/" +"edit":namespace +"/" +"add";
-                params.id =id;
+                let id = me.state.record && me.state.record.id ? me.state.record.id : false;
+                let type = id ? namespace + "/" + "edit" : namespace + "/" + "add";
+                params.id = id;
+                params.content = content;
                 filterFalse(params);
                 dispatch({
                     type,
@@ -110,6 +118,13 @@ export default class AgvForm extends PureComponent {
             }
         });
     };
+
+    handleEditorChage = (value) => {
+        this.setState({
+            content: value
+        })
+    };
+
     scrollToField = (fieldKey) => {
         const labelNode = document.querySelector(`label[for="${fieldKey}"]`);
         if (labelNode) {
@@ -120,7 +135,7 @@ export default class AgvForm extends PureComponent {
         this.props.dispatch(routerRedux.goBack());
     };
     renderErrorInfo = (fieldLabels) => {
-        const { form: { getFieldsError } } = this.props;
+        const {form: {getFieldsError}} = this.props;
         const errors = getFieldsError();
         const errorCount = Object.keys(errors).filter(key => errors[key]).length;
         if (!errors || errorCount === 0) {
@@ -132,7 +147,7 @@ export default class AgvForm extends PureComponent {
             }
             return (
                 <li key={key} className={styles.errorListItem} onClick={() => this.scrollToField(key)}>
-                    <Icon type="cross-circle-o" className={styles.errorIcon} />
+                    <Icon type="cross-circle-o" className={styles.errorIcon}/>
                     <div className={styles.errorMessage}>{errors[key][0]}</div>
                     <div className={styles.errorField}>{fieldLabels[key]}</div>
                 </li>
@@ -147,24 +162,29 @@ export default class AgvForm extends PureComponent {
             trigger="click"
             getPopupContainer={trigger => trigger.parentNode}
         >
-          <Icon type="exclamation-circle" />
+          <Icon type="exclamation-circle"/>
         </Popover>
                 {errorCount}
       </span>
         );
     };
+
     render() {
-        const { form: { getFieldDecorator }, addSubmitting, editSubmitting, pageType } = this.props;
+        const {form: {getFieldDecorator}, addSubmitting, editSubmitting, pageType} = this.props;
+        const {record = {}} = this.state;
         const rows = [];
         const fieldLabels = {};
         getInputs(pageType === 'edit').forEach((input) => {
-            fieldLabels[input.key] = input.label;
-            if (rows.length === 0 || rows[rows.length - 1].length === 2) {
-                rows.push([input]);
-                return;
+            if (input.key !== "content") {
+                fieldLabels[input.key] = input.label;
+                if (rows.length === 0 || rows[rows.length - 1].length === 2) {
+                    rows.push([input]);
+                    return;
+                }
+                rows[rows.length - 1].push(input);
             }
-            rows[rows.length - 1].push(input);
         });
+        console.warn("rows", rows);
         return (
             <PageHeaderLayout
                 title={getDesc(pageType)}
@@ -173,12 +193,15 @@ export default class AgvForm extends PureComponent {
                 <Card className={styles.card} bordered={false}>
                     <Form layout="horizontal">
                         {rows.map(row => (
-                            <Row key={row.map(i => i.key).join('-')} gutter={8}>
 
+                            <Row key={row.map(i => i.key).join('-')} gutter={8}>
                                 {
                                     row.map(input => (
                                         <Col key={input.key} md={12} sm={24}>
-                                            {renderFormInput(Object.assign({ formItemProps: formLayout, disabled: pageType === 'view' }, input), getFieldDecorator, this.state.record)}
+                                            {renderFormInput(Object.assign({
+                                                formItemProps: formLayout,
+                                                disabled: pageType === 'view'
+                                            }, input), getFieldDecorator, this.state.record)}
                                         </Col>
                                     ))}
                             </Row>
@@ -186,11 +209,24 @@ export default class AgvForm extends PureComponent {
                     </Form>
                 </Card>
 
-                <FooterToolbar style={{ width: this.state.width }}>
+                <Card className={styles.card} bordered={false}>
+                    <WangEditor
+                        borderWidth={1}
+                        borderColor="#E6E6E6"
+                        width="100%"
+                        height={600}
+                        adaptive={300}
+                        debug={true}
+                        data={record.content}
+                        onChange={this.handleEditorChage}
+                    />
+                </Card>
+                <FooterToolbar style={{width: this.state.width}}>
                     {/*{this.renderErrorInfo(fieldLabels)}*/}
-                    <Button style={{ marginRight: 8 }} onClick={this.goBack}>返回</Button>
+                    <Button style={{marginRight: 8}} onClick={this.goBack}>返回</Button>
                     {pageType !== 'view' && (
-                        <Button type="primary" onClick={this.validate} loading={pageType === 'edit'?editSubmitting:addSubmitting}>
+                        <Button type="primary" onClick={this.validate}
+                                loading={pageType === 'edit' ? editSubmitting : addSubmitting}>
                             提交
                         </Button>
                     )}

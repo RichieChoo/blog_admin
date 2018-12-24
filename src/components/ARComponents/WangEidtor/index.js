@@ -6,9 +6,8 @@ import {Button, message} from 'antd';
 
 
 const xss = require('xss');
-const EEditor = require('src/components/ARComponents/WangEidtor/index');
-const editor = new EEditor('#editor1', '#editor2');
-
+const EEditor =  require('wangeditor');
+const editor =  new EEditor('#editor1','#editor2');
 class WangEditor extends PureComponent {
     state = {
         data: '',
@@ -54,10 +53,11 @@ class WangEditor extends PureComponent {
             'redo'  // 重复
         ];
         const {
-            uploadImg: {
-                url, header, fileName = "photo", link = false, callback = () => {}
-            }, debug, data = ""
+            uploadImg={}, debug, data = ""
         } = this.props;
+        const {
+            url, header, fileName = "photo", link = false, callback = () => {}
+        }= uploadImg;
         const paramsList = this.props.noPicture ? noPictureList : list;
 
         if (uploadImg) {

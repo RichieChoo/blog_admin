@@ -192,12 +192,6 @@ class AppComponent extends PureComponent {
             width: 200,
         },
         {
-            title: '文章内容',
-            dataIndex: 'content',
-            width: 300,
-            key: 'content',
-        },
-        {
             title: '文章类型',
             dataIndex: 'type',
             width: 200,
@@ -298,7 +292,7 @@ class AppComponent extends PureComponent {
                         onSelectRow={this.handleSelectRows}
                         onChange={this.handleStandardTableChange}
                         rowKey="id"
-                        scroll={{ x: 2100 }}
+                        scroll={{ x: 1800 }}
                     />
                 </div>
             </Card>
